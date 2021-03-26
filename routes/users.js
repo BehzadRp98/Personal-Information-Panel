@@ -7,6 +7,10 @@ var hashingUtil = require('../utils/hashing');
 
 // Controllers functions
 var usersControllers = require('../controllers/users');
+var profileConterollers = require('../controllers/profile');
+
+// Middleware functions
+var authorizationMiddleware = require('../middleware/authorization');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -76,10 +80,12 @@ router.post('/login', async function(req, res, next) {
   let loginStatus = await usersControllers.selectUserFromDB(loginObj)
 
   if (loginStatus) {
+    let token = await authorizationMiddleware.generateJWT(loginStatus)
+    console.log(token)
+    res.cookie('pi_token', token)
     setTimeout(function() {
       res.redirect('/users/dashboard')
     }, 1000)
-    // res.sendStatus(200)
     return
   }
 
@@ -87,7 +93,35 @@ router.post('/login', async function(req, res, next) {
 })
 
 // GET dashboard page content
-router.get('/dashboard', function(req, res, next) {
+router.get('/dashboard', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+  let profileInfo = await profileConterollers.selectProfileFromDB(req.userInfo.userID)
+  res.render('dashboard', {
+    firstName: profileInfo.user.firstName,
+    lastName: profileInfo.user.lastName,
+    phoneNumber: profileInfo.phoneNumber,
+    birthdayDate: profileInfo.birthdayDate,
+    email: profileInfo.user.email,
+    biography: profileInfo.biography,
+    photoAddress: profileInfo.photoAddress
+  })
+})
+
+// POST dashboard page content
+router.post('/dashboard', async function(req, res, next) {
+  let profileObj = req.body
+  let insertStatus = await profileConterollers.insertProfileToDB(profileObj)
+  if (insertStatus) {
+    console.log('Ok')
+  } else {
+    console.log('Nok')
+  }
   res.render('dashboard')
 })
+
+// GET logout
+router.get('/logout', async function(req, res, next) {
+  res.clearCookie('pi_token')
+  res.redirect('/users/login')
+})
+
 module.exports = router;

@@ -1,4 +1,3 @@
-const { user } = require('../configs/database')
 const UsersModel = require('../models/users')
 
 var insertUserToDB = async function(userObj) {
