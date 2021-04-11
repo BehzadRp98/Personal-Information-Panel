@@ -67,11 +67,13 @@ router.post('/login', async function(req, res, next) {
 
   if (loginObj.email.length == 0 || loginObj.password.length == 0) {
     console.log('پرکردن فیلدها اجباری است')
+    req.flash('success_msg', 'OK')
     // res.render('login', {
-    //   success_msg: '',
+    //   success_msg: '',omodule
+
     //   error_msg: 'پرکردن فیلدها اجباری است'
     // })
-    res.sendStatus(400)
+    // res.sendStatus(400)
     return
   }
 
@@ -102,20 +104,35 @@ router.get('/dashboard', authorizationMiddleware.verifyJWT, async function(req, 
     birthdayDate: profileInfo.birthdayDate,
     email: profileInfo.user.email,
     biography: profileInfo.biography,
-    photoAddress: profileInfo.photoAddress
+    photoAddress: profileInfo.photoAddress,
+    btnStatus: profileInfo.birthdayDate.length > 0 ||
+              profileInfo.phoneNumber.length > 0 ||
+              profileInfo.biography.length > 0 ? true : false
   })
 })
 
 // POST dashboard page content
-router.post('/dashboard', async function(req, res, next) {
+router.post('/dashboard', authorizationMiddleware.verifyJWT, async function(req, res, next) {
   let profileObj = req.body
-  let insertStatus = await profileConterollers.insertProfileToDB(profileObj)
+  let insertStatus = false
+  if (req.body.btnStatus) {
+    profileObj.userID = req.userInfo.userID
+    insertStatus = await profileConterollers.updateProfileInDB(profileObj)
+    insertStatus = await usersControllers.updateUserInDB(profileObj)
+    if (insertStatus) {
+      let token = await authorizationMiddleware.generateJWT(profileObj)
+      console.log(token)
+      res.cookie('pi_token', token)
+    }
+  } else {
+    insertStatus = await profileConterollers.insertProfileToDB(profileObj)
+  }
   if (insertStatus) {
     console.log('Ok')
   } else {
     console.log('Nok')
   }
-  res.render('dashboard')
+  res.redirect('/users/dashboard')
 })
 
 // GET logout

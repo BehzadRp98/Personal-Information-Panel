@@ -44,7 +44,7 @@ const generateJWT = async function(userInfo) {
             firstName: userInfo.firstName,
             lastName: userInfo.lastName,
             email: userInfo.email,
-            id: userInfo._id,
+            id: userInfo._id ? userInfo._id : userInfo.userID,
         };
 
         return await jwt.sign(obj, PRIVATE_KEY);

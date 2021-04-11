@@ -40,5 +40,32 @@ var selectUserFromDB = async function(obj) {
     }
 }
 
+var updateUserInDB = async function(obj) {
+    try {
+        return UsersModel.updateOne({
+            _id: obj.userID
+        }, {
+            $set: {
+                firstName: obj.firstName,
+                lastName: obj.lastName,
+            }
+        })
+        .then(data => {
+            console.log(data)
+            if (data.nModified == 1) {
+                return true
+            }
+            return false
+        }).catch(err => {
+            console.log(err)
+            return false
+        })
+    } catch(err) {
+        console.log('EXCEPTION: ' + err)
+        return null
+    }
+}
+
 module.exports.insertUserToDB = insertUserToDB;
 module.exports.selectUserFromDB = selectUserFromDB;
+module.exports.updateUserInDB = updateUserInDB;
