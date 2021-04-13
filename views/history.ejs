@@ -60,7 +60,52 @@
 		  margin-right: 20%; /* Same as the width of the sidenav */
 		  padding: 0px 10px;
 		}
+
+		.horizontal_line {
+			margin: 5px;
+    		height: 2px;
+			background-color: #ffb100 !important;
+		}
 		
+		.slidecontainer {
+			width: 100%;
+		  }
+		  
+		  .slider {
+			-webkit-appearance: none;
+			width: 100%;
+			height: 10px;
+			border-radius: 5px;
+			border: 1px solid #ffb100;
+			background-color: #ffb100;
+			outline: none;
+			opacity: 0.7;
+			-webkit-transition: .2s;
+			transition: opacity .2s;
+		  }
+		  
+		  .slider:hover {
+			opacity: 1;
+		  }
+		  
+		  .slider::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 25px;
+			height: 25px;
+			border-radius: 50%;
+			background: black;
+			cursor: pointer;
+		  }
+		  
+		  .slider::-moz-range-thumb {
+			width: 25px;
+			height: 25px;
+			border-radius: 50%;
+			background: #4CAF50;
+			cursor: pointer;
+		  }
+
 		@media screen and (max-height: 450px) {
 		  .sidenav {padding-top: 15px;}
 		  .sidenav a {font-size: 18px;}
@@ -141,47 +186,78 @@
 			</div>
 		</div>
 	  </div>
-	<!-- loader END -->
+      <!-- loader END -->
 	<!-- Wrapper Start -->
 	<div class="main">
 		<div class="col">
-			<h3 class="text-center header-top-margin">حساب کاربری</h3>
+			<h3 class="text-center header-top-margin">سوابق</h3>
 			<div class="modal-body header-top-margin">
-				<form action="/users/dashboard" method="POST">
+				<p class="text-right header-top-margin"><b>سوابق تحصیلی</b></p>
+				<form action="/users/history" method="POST">
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<input type="text" id="firstName" name="firstName" class="form-control" value='<%= firstName %>' placeholder="نام">
+							<input type="text" id="grade" name="grade" class="form-control" value="<%= grade %>" placeholder="مقطع تحصیلی">
 						</div>
 						<div class="col-md-6 mb-3">
-							<input type="text" id="lastName" name="lastName" class="form-control" value='<%= lastName %>' placeholder="نام خانوادگی">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" value='<%= phoneNumber %>' placeholder="تلفن همراه">
-						</div>
-						<div class="col-md-6 mb-3">
-							<input type="text" id="birthdayDate" name="birthdayDate" class="form-control" value='<%= birthdayDate %>' placeholder="تاریخ تولد">
+							<input type="text" id="major" name="major" class="form-control" value="<%= major %>" placeholder="رشته تحصیلی">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12 mb-3">
-							<input type="email" id="email" name="email" class="form-control" value='<%= email %>' placeholder="ایمیل" disabled='true'>
+							<input type="text" id="university" name="university" value="<%= university %>" class="form-control" placeholder="موسسه آموزشی">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<input type="text" id="endYear" name="endYear" value="<%= endYear %>" class="form-control" placeholder="سال فارغ التحصیلی">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12 mb-3">
-							<textarea class="form-control" id="biography" name="biography" placeholder="بیوگرافی"><%= biography %></textarea>
+							<textarea class="form-control" id="eduDescription" name="eduDescription" placeholder="توضیحات"><%= eduDescription %></textarea>
+						</div>
+					</div>
+
+					<div class="horizontal_line"></div>
+
+					<p class="text-right header-top-margin"><b>سوابق کاری</b></p>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<input type="text" id="job" name="job" value="<%= job %>" class="form-control" placeholder="شغل">
+						</div>
+						<div class="col-md-6 mb-3">
+							<input type="text" id="post" name="post" value="<%= post %>" class="form-control" placeholder="سِمت">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 mb-3">
+							<input type="text" id="place" name="place" value="<%= place %>" class="form-control" placeholder="محل کار">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<p class="mt-2 text-right">عکس مورد نظر را با محدودیت کمتر از 2 مگابایت انتخاب کنید:</p>
+							<input type="text" id="expYear" name="expYear" value="<%= expYear %>" class="form-control" placeholder="مدت زمان فعالیت">
 						</div>
-						<div class="col-md-6 mb-3">
-							<div class="custom-file">
-								<input type="file" class="custom-file-input" id="photoAddress" name="photoAddress" value="<%= photoAddress %>">
-								<label class="custom-file-label" for="photoAddress"><%= photoAddress %></label>
+					</div>
+					<div class="row">
+						<div class="col-md-12 mb-3">
+							<textarea class="form-control" id="wDescription" name="wDescription" placeholder="توضیحات"><%= wDescription %></textarea>
+						</div>
+					</div>
+
+					<div class="horizontal_line"></div>
+
+					<p class="text-right header-top-margin"><b>مهارت ها</b></p>
+					<div class="row">
+						<div class="col-md-12 mb-3">
+							<input type="text" id="ability" name="ability" value="<%= ability %>" class="form-control" placeholder="عنوان مهارت">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 mb-3 range">
+							<div class="slidecontainer">
+								<input type="range" min="0" max="100" value="<%= myRange %>" class="slider" id="myRange" name="myRange">
+								<p>Value: <span id="demo"></span>%</p>
 							</div>
 						</div>
 					</div>
@@ -191,6 +267,7 @@
 							<button type="submit" class="btn btn-primary">ذخیره</button>
 						<% } else { %>
 							<button type="submit" class="btn btn-primary">بروزرسانی</button>
+							<button type="submit" class="btn btn-primary" disabled="true">حذف</button>
 						<% } %>
 					</div>
 				</form>
@@ -198,8 +275,17 @@
 		</div>
 	</div>
 	<!-- Wrapper End-->
-	
-	<!-- Backend Bundle JavaScript -->
+    <!-- loader END -->
+	<script>
+		var slider = document.getElementById("myRange");
+		var output = document.getElementById("demo");
+		output.innerHTML = slider.value;
+		
+		slider.oninput = function() {
+		  output.innerHTML = this.value;
+		}
+	</script>
+    <!-- Backend Bundle JavaScript -->  
 	<script src="../assets/js/backend-bundle.min.js"></script>
 
 	<!-- Flextree Javascript-->
@@ -235,6 +321,4 @@
 	<!-- app JavaScript -->
 	<script src="../assets/js/app.js"></script>
 </body>
-
-
 </html>

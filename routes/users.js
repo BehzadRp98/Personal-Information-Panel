@@ -7,7 +7,8 @@ var hashingUtil = require('../utils/hashing');
 
 // Controllers functions
 var usersControllers = require('../controllers/users');
-var profileConterollers = require('../controllers/profile');
+var profileControllers = require('../controllers/profile');
+var historyControllers = require('../controllers/history');
 
 // Middleware functions
 var authorizationMiddleware = require('../middleware/authorization');
@@ -96,7 +97,7 @@ router.post('/login', async function(req, res, next) {
 
 // GET dashboard page content
 router.get('/dashboard', authorizationMiddleware.verifyJWT, async function(req, res, next) {
-  let profileInfo = await profileConterollers.selectProfileFromDB(req.userInfo.userID)
+  let profileInfo = await profileControllers.selectProfileFromDB(req.userInfo.userID)
   res.render('dashboard', {
     firstName: profileInfo.user.firstName,
     lastName: profileInfo.user.lastName,
@@ -115,9 +116,9 @@ router.get('/dashboard', authorizationMiddleware.verifyJWT, async function(req, 
 router.post('/dashboard', authorizationMiddleware.verifyJWT, async function(req, res, next) {
   let profileObj = req.body
   let insertStatus = false
+  profileObj.userID = req.userInfo.userID
   if (req.body.btnStatus) {
-    profileObj.userID = req.userInfo.userID
-    insertStatus = await profileConterollers.updateProfileInDB(profileObj)
+    insertStatus = await profileControllers.updateProfileInDB(profileObj)
     insertStatus = await usersControllers.updateUserInDB(profileObj)
     if (insertStatus) {
       let token = await authorizationMiddleware.generateJWT(profileObj)
@@ -125,7 +126,7 @@ router.post('/dashboard', authorizationMiddleware.verifyJWT, async function(req,
       res.cookie('pi_token', token)
     }
   } else {
-    insertStatus = await profileConterollers.insertProfileToDB(profileObj)
+    insertStatus = await profileControllers.insertProfileToDB(profileObj)
   }
   if (insertStatus) {
     console.log('Ok')
@@ -133,6 +134,68 @@ router.post('/dashboard', authorizationMiddleware.verifyJWT, async function(req,
     console.log('Nok')
   }
   res.redirect('/users/dashboard')
+})
+
+// GET history page content
+router.get('/history', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+  let historyInfo = await historyControllers.selectHistoryFromDB(req.userInfo.userID)
+  res.render('history', {
+    grade: historyInfo ? historyInfo.grade : '',
+    major: historyInfo ? historyInfo.major : '',
+    university: historyInfo ? historyInfo.university : '',
+    endYear: historyInfo ? historyInfo.endYear : '',
+    eduDescription: historyInfo ? historyInfo.eduDescription : '',
+
+    // Perofessional History
+    job: historyInfo ? historyInfo.job : '',
+    post: historyInfo ? historyInfo.post : '',
+    place: historyInfo ? historyInfo.place : '',
+    expYear: historyInfo ? historyInfo.expYear : '',
+    wDescription: historyInfo ? historyInfo.wDescription : '',
+
+    // Abilities
+    ability: historyInfo ? historyInfo.ability : '',
+    myRange: historyInfo ? historyInfo.myRange : '0',
+    btnStatus: historyInfo == null ? false : true
+  })
+})
+
+// POST history page content
+router.post('/history', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+  let historyObj = req.body
+  let insertStatus = false
+  historyObj.userID = req.userInfo.userID
+  if (req.body.btnStatus == 'true') {
+    insertStatus = await historyControllers.updateHistoryInDB(historyObj)
+  } else {
+    insertStatus = await historyControllers.insertHistoryToDB(historyObj)
+  }
+  if (insertStatus) {
+    console.log('Ok')
+  } else {
+    console.log('Nok')
+  }
+  res.redirect('/users/history')
+})
+
+router.delete('/history', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+  let deleteStatus = await historyControllers.deleteHistoryFromDB('6054e79f9fcccd435cfe7e4b')
+  if (deleteStatus) {
+    console.log('Ok')
+  } else {
+    console.log('Nok')
+  }
+  res.redirect('/users/history')
+})
+
+// GET blogs page content
+router.get('/blogs', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+  res.render('blogs')
+})
+
+// GET tickets page content
+router.get('/tickets', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+  res.render('tickets')
 })
 
 // GET logout

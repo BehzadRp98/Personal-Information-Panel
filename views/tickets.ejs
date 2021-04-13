@@ -141,65 +141,11 @@
 			</div>
 		</div>
 	  </div>
-	<!-- loader END -->
-	<!-- Wrapper Start -->
-	<div class="main">
-		<div class="col">
-			<h3 class="text-center header-top-margin">حساب کاربری</h3>
-			<div class="modal-body header-top-margin">
-				<form action="/users/dashboard" method="POST">
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<input type="text" id="firstName" name="firstName" class="form-control" value='<%= firstName %>' placeholder="نام">
-						</div>
-						<div class="col-md-6 mb-3">
-							<input type="text" id="lastName" name="lastName" class="form-control" value='<%= lastName %>' placeholder="نام خانوادگی">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" value='<%= phoneNumber %>' placeholder="تلفن همراه">
-						</div>
-						<div class="col-md-6 mb-3">
-							<input type="text" id="birthdayDate" name="birthdayDate" class="form-control" value='<%= birthdayDate %>' placeholder="تاریخ تولد">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3">
-							<input type="email" id="email" name="email" class="form-control" value='<%= email %>' placeholder="ایمیل" disabled='true'>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3">
-							<textarea class="form-control" id="biography" name="biography" placeholder="بیوگرافی"><%= biography %></textarea>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<p class="mt-2 text-right">عکس مورد نظر را با محدودیت کمتر از 2 مگابایت انتخاب کنید:</p>
-						</div>
-						<div class="col-md-6 mb-3">
-							<div class="custom-file">
-								<input type="file" class="custom-file-input" id="photoAddress" name="photoAddress" value="<%= photoAddress %>">
-								<label class="custom-file-label" for="photoAddress"><%= photoAddress %></label>
-							</div>
-						</div>
-					</div>
-					<input type="text" style="display: none;" id="btnStatus" name="btnStatus" value='<%= btnStatus %>'>
-					<div class="modal-footer">
-						<% if (!btnStatus) { %>
-							<button type="submit" class="btn btn-primary">ذخیره</button>
-						<% } else { %>
-							<button type="submit" class="btn btn-primary">بروزرسانی</button>
-						<% } %>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<!-- Wrapper End-->
-	
-	<!-- Backend Bundle JavaScript -->
+      <div class="main">
+          <p>Tickets</p>
+      </div>
+      <!-- loader END -->
+      <!-- Backend Bundle JavaScript -->
 	<script src="../assets/js/backend-bundle.min.js"></script>
 
 	<!-- Flextree Javascript-->
@@ -235,6 +181,4 @@
 	<!-- app JavaScript -->
 	<script src="../assets/js/app.js"></script>
 </body>
-
-
 </html>

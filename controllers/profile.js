@@ -5,7 +5,7 @@ var insertProfileToDB = async function(profileObj) {
     try {
         var newProfile = new ProfileModel({
             // user: profileObj.userID,
-            user: mongoose.Types.ObjectId('6054e79f9fcccd435cfe7e4b'),
+            user: mongoose.Types.ObjectId(profileObj.userID),
             phoneNumber: profileObj.phoneNumber,
             birthdayDate: profileObj.birthdayDate,
             biography: profileObj.biography,
