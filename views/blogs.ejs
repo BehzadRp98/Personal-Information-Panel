@@ -16,12 +16,21 @@
 	<link rel="stylesheet" href="../assets/vendor/remixicon/fonts/remixicon.css">
 	<link rel="stylesheet" href="../assets/vendor/%40icon/dripicons/dripicons.css">
 
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+	<script>
+		tinymce.init({
+		  selector: '#content',
+		  plugins: 'lists link image emoticons',
+		  height: '75vh'
+		});
+	</script>
+
 	<!-- <link rel='stylesheet' href='../assets/vendor/fullcalendar/core/main.css' />
 	<link rel='stylesheet' href='../assets/vendor/fullcalendar/daygrid/main.css' />
 	<link rel='stylesheet' href='../assets/vendor/fullcalendar/timegrid/main.css' />
 	<link rel='stylesheet' href='../assets/vendor/fullcalendar/list/main.css' />
 	<link rel="stylesheet" href="../assets/vendor/mapbox/mapbox-gl.css"> -->
-	<style>		
+	<style>
 		.sidenav {
 		  height: 100%;
 		  width: 20%;
@@ -59,6 +68,12 @@
 		.main {
 		  margin-right: 20%; /* Same as the width of the sidenav */
 		  padding: 0px 10px;
+		}
+
+		.horizontal_line {
+			margin: 5px;
+    		height: 2px;
+			background-color: #ffb100 !important;
 		}
 		
 		@media screen and (max-height: 450px) {
@@ -142,7 +157,53 @@
 		</div>
 	  </div>
       <div class="main">
-          <p>Blogs</p>
+		<div class="col">
+			<h3 class="text-center header-top-margin">بلاگ ها</h3>
+			<div class="modal-body header-top-margin">
+				<% blogs.forEach(function(post) { %>
+					<div class="row">
+						<div class="col-md-12 mb-3">
+							<p class="text-right header-top-margin"><b><a href="/discussion/?postId=<%= post._id %>"><%= post.title %></a></b></p>
+							<p class="text-left" style="direction: ltr;"><%= post.content.substring(0, 20) %>...</p>
+							<div class="row">
+								<div class="col-md-1 mb-3">
+									<a class="btn btn-primary" href="/users/blogs?id=<%= post._id %>">ویرایش</a>
+								</div>
+								<div class="col-md-1 mb-3">
+									<form action="/users/blogs/<%= post._id %>" method="GET">
+										<button type="submit" class="btn btn-primary">حذف</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% }); %>
+
+				<div class="horizontal_line"></div>
+
+				<form action="/users/blogs" method="POST">
+					<div class="row">
+						<div class="col-md-12 mb-3">
+							<input type="text" id="title" name="title" value="<%= blog.title %>" class="form-control" placeholder="عنوان">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 mb-3">
+							<textarea id="content" name="content"><%= blog.content %></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="text" style="display: none;" id="blogID" name="blogID" value='<%= blog._id %>'>
+						<input type="text" style="display: none;" id="btnStatus" name="btnStatus" value='<%= btnStatus %>'>
+						<% if (!btnStatus) { %>
+							<button type="submit" class="btn btn-primary">ذخیره</button>
+						<% } else { %>
+							<button type="submit" class="btn btn-primary">بروزرسانی</button>
+						<% } %>
+					</div>
+				</form>
+			</div>
+		</div>
       </div>
       <!-- loader END -->
       <!-- Backend Bundle JavaScript -->

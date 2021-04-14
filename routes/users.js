@@ -9,6 +9,7 @@ var hashingUtil = require('../utils/hashing');
 var usersControllers = require('../controllers/users');
 var profileControllers = require('../controllers/profile');
 var historyControllers = require('../controllers/history');
+var blogControllers = require('../controllers/blogs');
 
 // Middleware functions
 var authorizationMiddleware = require('../middleware/authorization');
@@ -65,7 +66,6 @@ router.get('/login', function(req, res, next) {
 // POST login page content
 router.post('/login', async function(req, res, next) {
   let loginObj = req.body
-
   if (loginObj.email.length == 0 || loginObj.password.length == 0) {
     console.log('پرکردن فیلدها اجباری است')
     req.flash('success_msg', 'OK')
@@ -190,7 +190,48 @@ router.delete('/history', authorizationMiddleware.verifyJWT, async function(req,
 
 // GET blogs page content
 router.get('/blogs', authorizationMiddleware.verifyJWT, async function(req, res, next) {
-  res.render('blogs')
+  let blogsInfo = await blogControllers.selectBlogsFromDB(req.userInfo.userID)
+  let blogInfo = {
+    title: '',
+    content: '',
+    _id: ''
+  }
+  if (req.query.id) {
+    blogInfo = await blogControllers.selectBlogFromDB(req.userInfo.userID, req.query.id)
+  }
+  res.render('blogs', {
+    blogs: blogsInfo,
+    blog: blogInfo,
+    btnStatus: blogInfo.title.length > 0 ||
+              blogInfo.content.length > 0 ? true : false
+  })
+})
+
+// POST blogs page content
+router.post('/blogs', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+  let blogObj = req.body
+  let insertStatus = false
+  blogObj.userID = req.userInfo.userID
+  if (req.body.btnStatus == 'true') {
+    insertStatus = await blogControllers.updateBlogInDB(blogObj)
+  } else {
+    insertStatus = await blogControllers.insertBlogToDB(blogObj)
+  }
+  if (insertStatus) {
+    console.log('Ok')
+  } else {
+    console.log('Nok')
+  }
+  res.redirect('/users/blogs')
+})
+
+// DELETE blogs page conent
+router.get('/blogs/:blogID', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+  let deleteStatus = await blogControllers.deleteBlogFromDB(req.userInfo.userID, req.params.blogID)
+  if (deleteStatus) {
+    res.redirect('/users/blogs')
+  }
+  res.send(400)
 })
 
 // GET tickets page content
