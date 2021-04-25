@@ -56,11 +56,11 @@ router.post('/register', async function(req, res, next) {
 
 // GET login page content
 router.get('/login', function(req, res, next) {
-  res.render('login')
-  // res.render('login', {
-  //   success_msg: '',
-  //   error_msg: ''
-  // })
+  // res.render('login')
+  res.render('login', {
+    success_msg: '',
+    error_msg: ''
+  })
 })
 
 // POST login page content

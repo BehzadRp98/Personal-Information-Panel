@@ -1,0 +1,162 @@
+@font-face {
+    font-family: iy;
+    font-style: normal;
+    font-weight: normal;
+    src: url('fonts/iran-yekan-400.eot');
+    src: url('fonts/iran-yekan-400.html?#iefix') format('embedded-opentype'),
+    url('fonts/iran-yekan-400.woff2') format('woff2'),
+    url('fonts/iran-yekan-400.woff') format('woff'),
+    url('fonts/iran-yekan-400.ttf') format('truetype');
+}
+body, p,h1,h2,h3,h4,h5,h6,span{
+    font-family: iy !important;
+}
+html{
+
+    direction: rtl;
+}
+ul.profile-information {
+    list-style: none;
+    margin: 8px 55px 8px 00px;
+}
+
+ul.profile-information li:first-child:before {
+    margin-right: -51px;
+    margin-left: unset;
+}
+ul.profile-information li:first-child {
+
+    padding-right: 30px;
+    padding-left: unset;
+
+}
+ul.profile-information li {
+    padding: 0 20px 23px 0;
+    border-right:   2px solid #eee;
+    border-left: unset;
+}
+ul.profile-information li:first-child:after {
+    left: unset;
+    right: 0;
+}
+ul.profile-information li:before {
+    margin-left: unset;
+    margin-right: -25px;
+}
+.site-btn.icon i {
+    float: left;
+    margin-left: unset;
+    margin-right: 15px;
+}
+
+
+.profile-image {
+    margin-top: -18px;
+    -webkit-clip-path: polygon(0 9%, 100% 0, 100% 94%, 0% 100%);
+    clip-path: polygon(0 0, 100% 9%, 100% 100%, 0 91%);
+}
+header nav ul li {
+    float: right;
+}
+header nav a.home-btn {
+    margin-right: unset;
+    margin-left: 10px;
+}
+.site-btn.icon {
+    text-align: right;
+    padding: 1px 19px 1px 4px;
+}
+header nav .site-btn {
+    margin: 18px 5px 0 18px;
+}
+.pull-right {
+    float: left !important;
+}
+footer .footer .copyright {
+    text-align: left;
+}
+.demo .settings {
+
+    right: 200px !important;
+}
+.demo {
+    right: -200px;
+    left: unset;
+}
+ul.timeline {
+    margin-right: 10px;
+    margin-left: unset;
+}
+.timeline li:before {
+    margin-right: -35px;
+    margin-left: unset;
+}
+.timeline-title {
+    margin-right: 25px;
+    margin-left: unset;
+
+}
+.timeline li:first-child i {
+    float: right;
+}
+.timeline li {
+    padding: 0 30px 40px 0px;
+    padding-top: 0px;
+    padding-right: 30px;
+    padding-bottom: 40px;
+    padding-left: 0px
+}
+.timeline li:first-child {
+    padding: 0 19px 60px 0px;
+}
+.timeline li {
+    border-right: solid 2px #ececec;
+    border-left: unset;
+}
+#portfolio #filters-container .cbp-filter-item {
+    float: right;
+    margin-left: 15px;
+    margin-right: unset;
+}
+
+.owl-carousel .owl-wrapper-outer {
+
+    direction: ltr;
+}
+.owl-carousel .owl-wrapper-outer {
+    overflow: inherit;
+    direction: ltr;
+}
+.testimonials .comment .top-section figure {
+
+    float: right;
+}
+.testimonials .comment .top-section .name-info{
+    direction: rtl;
+}
+.testimonials p{
+    direction: rtl;
+}
+
+
+
+
+
+.testimonials .comment .top-section .name-info{
+    float:right;
+}
+blockquote{
+    border-left: unset;
+    border-right:unset ;
+    border-left: 5px;
+    border-right: 0px;
+}
+
+#blog-post .post-list ul li a .info span {
+    margin-left: unset;
+    margin-right: 5px;
+}
+
+header nav a.home-btn{
+    border-radius: 0 6px 6px 0 !important;
+}

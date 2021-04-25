@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<!-- Simple Page Needs
+================================================== -->
+<title>قالب مت- قالب طراح خلاق و شخصی مت</title>
+<meta charset="UTF-8">
+<meta name="description" content="Mat - Resume & vCard HTML Template">
+<meta name="keywords" content="personal, vcard, portfolio">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+<!-- Favicon
+================================================== -->  
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="../indexAssets/css/bootstrap.css"/>
+<link rel="stylesheet" href="../indexAssets/css/reset.css"/>
+<link rel="stylesheet" href="../indexAssets/cubeportfolio/css/cubeportfolio.min.css"/>
+<link rel="stylesheet" href="../indexAssets/css/owl.theme.css"/> 
+<link rel="stylesheet" href="../indexAssets/css/owl.carousel.css"/>
+<link rel="stylesheet" href="../indexAssets/css/style.css"/>
+<link rel="stylesheet" href="../indexAssets/css/colors/yellow.css" id="color"/>
+
+    
+<!-- Google Web fonts
+================================================== --> 
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+
+<!-- Font Icons
+================================================== --> 
+<link rel="stylesheet" href="../indexAssets/icon-fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="../indexAssets/icon-fonts/web-design/flaticon.css" />
+
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/morteza/bootstrap-rtl/v3.3.4/dist/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" href="../indexAssets/css/rtl.css">
+
+
+</head>
+<body>
+ <!-- Preloading -->
+<div id="preloader">
+    <div class="spinner">
+    </div>
+</div>
+
+<!-- Wrapper -->
+<div class="wrapper top_60 container">
+<div class="row">
+
+<!-- Profile Section
+================================================== -->
+<div class="col-lg-3 col-md-4">
+    <div class="profile">
+        <div class="profile-name">
+            <span class="name"><%= firstName %> <%= lastName %></span><br>
+            <span class="job"><%= job %></span>
+        </div>
+        <figure class="profile-image">
+            <img src="../indexAssets/../indexAssets/images/profile.jpg" alt="">
+        </figure>
+        <ul class="profile-information">
+            <li></li>
+            <li><p><span>نام:</span> <%= firstName %> <%= lastName%></p></li>
+            <li><p><span>تاریخ:</span> <%= birthdayDate %></p></li>
+            <li><p><span>شغل:</span> <%= job %></p></li>
+            <li><p><span>ایمیل:</span> <%= email %></p></li>
+            <!-- <li><p><span>اسکایت</span> themino</p></li> -->
+        </ul>
+        <div class="col-md-12">
+            <button class="site-btn icon">دانلود رزومه <i class="fa fa-download" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Page Tab Container Div -->
+<div id="ajax-tab-container" class="col-lg-9 col-md-8 tab-container">
+
+<!-- Header
+================================================== -->
+<div class="row">
+    <header class="col-md-12">
+        <nav>
+            <div class="row">
+                <!-- navigation bar -->
+                <div class="col-md-8 col-sm-8 col-xs-4">
+                    <ul class="tabs">
+                        <li class="tab active">
+                            <a class="home-btn active" href="/home"><i class="fa fa-home"
+                                                                       aria-hidden="true"></i></a>
+                        </li>
+                        <li class="tab"><a href="/resume" class="">رزومه</a></li>
+                        <!-- <li class="tab"><a href="/portfolio">نمونه کار</a></li> -->
+                        <li class="tab"><a href="/blog" class="">وبلاگ</a></li>
+                        <li class="tab"><a href="/contact">تماس بامن</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-8 dynamic">
+                    <button class="pull-right site-btn icon hidden-xs">استخدام <i class="fa fa-paper-plane"
+                                                                                  aria-hidden="true"></i>
+                    </button>
+                    <div class="hamburger pull-right hidden-lg hidden-md"><i class="fa fa-bars"
+                                                                             aria-hidden="true"></i></div>
+                    <div class="hidden-md social-icons pull-right">
+                        <a class="fb" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        <a class="tw" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        <a class="ins" href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a class="dr" href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+         <!--   <div class="menuout">
+                <div class="menuin" style="display: none;">
+                    <ul class="tabs">
+                        <li class="tab">
+                            <a class="home-btn" href="#home"><i class="fa fa-home"
+                                                                aria-hidden="true"></i></a>
+                        </li>
+                        <li class="tab"><a href="#resume">رزومه</a></li>
+                        <li class="tab"><a href="#portfolio">نمونه کار</a></li>
+                        <li class="tab"><a href="#blog">وبلاگ</a></li>
+                        <li class="tab"><a href="#contact">تماس بامن</a></li>
+                    </ul>
+                </div>
+            </div>-->
+        </nav>
+    </header>
+
+    <!-- Page Content
+    ================================================== -->
+    <div class="col-md-12">
+        <div id="content" class="panel-container">
+
+            <!-- Resume Page
+            ================================================== -->
+            <div id="resume">
+                <!-- Resume Section -->
+                <div class="row">
+                    <section class="education">
+                        <div class="section-title top_30"><span></span>
+                            <h2>از سرگیری</h2></div>
+                        <div class="row">
+                            <!-- Working History -->
+                            <div class="working-history col-md-6 padding_15 padbot_30">
+                                <ul class="timeline col-md-12 top_30">
+                                    <li><i class="fa fa-suitcase" aria-hidden="true"></i>
+                                        <h2 class="timeline-title">رزومه تاریخچه کار</h2></li>
+                                    <!-- a work -->
+                                    <li><h3 class="line-title"><%= post %> - <%= place %></h3>
+                                        <span><%= expYear %> سال</span>
+                                        <p class="little-text">
+                                            <%= wDescription %>
+                                        </p>
+                                    </li>
+                                    <!-- a work -->
+                                    <li><h3 class="line-title">طراح ارشد - Google</h3>
+                                        <span>2008 - 2010</span>
+                                        <p class="little-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                            از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون
+                                            بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
+                                    </li>
+                                    <!-- a work -->
+                                    <li><h3 class="line-title">طراح جوان_لزرش خلاق</h3>
+                                        <span>2005 - 2008</span>
+                                        <p class="little-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                            از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون
+                                            بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Education History -->
+                            <div class="education-history col-md-6 padding_15 padbot_30">
+                                <ul class="timeline col-md-12 top_30">
+                                    <li><i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                        <h2 class="timeline-title">تاریخچه آموزش</h2></li>
+                                    <!-- a work -->
+                                    <li><h3 class="line-title"><%= university %></h3>
+                                        <span>فارغ التحصیل در سال <%= endYear %> مقطع <%= grade %> رشته <%= major %></span>
+                                        <p class="little-text">
+                                            <%= eduDescription %>
+                                        </p>
+                                    </li>
+                                    <!-- a work -->
+                                    <li><h3 class="line-title">دوره طراحی</h3>
+                                        <span>2003 - 2004</span>
+                                        <p class="little-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                            از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون
+                                            بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
+                                    </li>
+                                    <!-- a work -->
+                                    <li><h3 class="line-title">خبر از دبیرستان</h3>
+                                        <span>2000 - 2003</span>
+                                        <p class="little-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                            از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون
+                                            بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- Clients Section -->
+                <div class="row">
+                    <section class="clients col-md-12 graybg padding_45 padbot_45">
+                        <div class="section-title bottom_30"><span></span>
+                            <h2>مشتری ها</h2></div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="client">
+                                    <img src="../indexAssets/images/client-01.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="client">
+                                    <img src="../indexAssets/images/client-02.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="client">
+                                    <img src="../indexAssets/images/client-03.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="client">
+                                    <img src="../indexAssets/images/client-04.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- Testimonials -->
+                <div class="row">
+                    <section class="testimonials bottom_30">
+                        <div class="section-title top_60 bottom_30"><span></span><h2>توضیحات</h2></div>
+                        <div class="owl-carousel row" data-items="3" data-autoplay="3000" data-pagination="true">
+                            <!-- a item -->
+                            <div class="col-md-12 item">
+                                <div class="comment">
+                                    <div class="top-section">
+                                        <figure>
+                                            <img src="../indexAssets/images/testimonial-1.jpg" alt="">
+                                        </figure>
+                                        <div class="name-info">
+                                            <span class="name">جک گرات</span>
+                                            <span class="job">فریلنسر</span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+                                </div>
+                            </div>
+                            <!-- a item -->
+                            <div class="col-md-12 item">
+                                <div class="comment">
+                                    <div class="top-section">
+                                        <figure>
+                                            <img src="../indexAssets/images/testimonial-2.jpg" alt="">
+                                        </figure>
+                                        <div class="name-info">
+                                            <span class="name">آوریل م. گریفین</span>
+                                            <span class="job">موسس</span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+                                </div>
+                            </div>
+                            <!-- a item -->
+                            <div class="col-md-12 item">
+                                <div class="comment">
+                                    <div class="top-section">
+                                        <figure>
+                                            <img src="../indexAssets/images/testimonial-3.jpg" alt="">
+                                        </figure>
+                                        <div class="name-info">
+                                            <span class="name">لری ام جانسون</span>
+                                            <span class="job">فریلنسر</span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+                                </div>
+                            </div>
+                            <!-- a item -->
+                            <div class="col-md-12 item">
+                                <div class="comment">
+                                    <div class="top-section">
+                                        <figure>
+                                            <img src="../indexAssets/images/testimonial-1.jpg" alt="">
+                                        </figure>
+                                        <div class="name-info">
+                                            <span class="name">جک گرات</span>
+                                            <span class="job">فریلنسر</span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+                                </div>
+                            </div>
+                            <!-- a item -->
+                            <div class="col-md-12 item">
+                                <div class="comment">
+                                    <div class="top-section">
+                                        <figure>
+                                            <img src="../indexAssets/images/testimonial-2.jpg" alt="">
+                                        </figure>
+                                        <div class="name-info">
+                                            <span class="name">آوریل م. گریفین</span>
+                                            <span class="job">موسس</span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
+                                </div>
+                            </div>
+                            <!-- a item -->
+                            <div class="col-md-12 item">
+                                <div class="comment">
+                                    <div class="top-section">
+                                        <figure>
+                                            <img src="../indexAssets/images/testimonial-3.jpg" alt="">
+                                        </figure>
+                                        <div class="name-info">
+                                            <span class="name">لری ام جانسون</span>
+                                            <span class="job">فریلنسر</span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+                                </div>
+                            </div>
+                            <!-- a item -->
+                            <div class="col-md-12 item">
+                                <div class="comment">
+                                    <div class="top-section">
+                                        <figure>
+                                            <img src="../indexAssets/images/testimonial-1.jpg" alt="">
+                                        </figure>
+                                        <div class="name-info">
+                                            <span class="name">جک گرات</span>
+                                            <span class="job">فریلنسر</span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+                                </div>
+                            </div>
+                            <!-- a item -->
+                            <div class="col-md-12 item">
+                                <div class="comment">
+                                    <div class="top-section">
+                                        <figure>
+                                            <img src="../indexAssets/images/testimonial-2.jpg" alt="">
+                                        </figure>
+                                        <div class="name-info">
+                                            <span class="name">آوریل م. گریفین</span>
+                                            <span class="job">موسس</span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+                                </div>
+                            </div>
+                            <!-- a item -->
+                            <div class="col-md-12 item">
+                                <div class="comment">
+                                    <div class="top-section">
+                                        <figure>
+                                            <img src="../indexAssets/images/testimonial-3.jpg" alt="">
+                                        </figure>
+                                        <div class="name-info">
+                                            <span class="name">لری ام جانسون</span>
+                                            <span class="job">فریلنسر</span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div><!-- Content - End -->
+     </div> <!-- col-md-12 end -->
+</div><!-- row end -->
+<!-- Footer
+================================================== -->
+    <footer>
+        <div class="footer col-md-12 top_30 bottom_30">
+            <div class="name col-md-4 hidden-md hidden-sm hidden-xs">ارائه در راستچین</div>
+            <div class="copyright col-lg-8 col-md-12">© تمامی حقوق برای تمینو محفوظ است. <a
+                 
+        </div>
+    </footer>
+
+</div> <!-- Tab Container - End -->
+</div> <!-- Row - End -->
+</div> <!-- Wrapper - End -->
+
+<!-- Javascripts
+================================================== -->
+<script src="../indexAssets/js/jquery-2.1.4.min.js"></script>
+<script src="../indexAssets/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+<script src="../indexAssets/js/bootstrap.min.js"></script>
+<script src="../indexAssets/js/jquery.easytabs.min.js"></script>
+<script src="../indexAssets/js/owl.carousel.min.js"></script>
+<script src="../indexAssets/js/main.js"></script>
+<!-- for color alternatives -->
+<!-- <script src="js/jquery.cookie-1.4.1.min.js"></script> -->
+<!-- <script src="js/Demo.js"></script> -->
+<!-- <link rel="stylesheet" href="css/Demo.min.css" /> -->
+
+
+</body>
+</html>
