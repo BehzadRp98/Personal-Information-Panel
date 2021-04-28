@@ -10,6 +10,7 @@ var usersControllers = require('../controllers/users');
 var profileControllers = require('../controllers/profile');
 var historyControllers = require('../controllers/history');
 var blogControllers = require('../controllers/blogs');
+var ticketsControllers = require('../controllers/contact');
 
 // Middleware functions
 var authorizationMiddleware = require('../middleware/authorization');
@@ -236,7 +237,33 @@ router.get('/blogs/:blogID', authorizationMiddleware.verifyJWT, async function(r
 
 // GET tickets page content
 router.get('/tickets', authorizationMiddleware.verifyJWT, async function(req, res, next) {
-  res.render('tickets')
+  let ticketsInfo = await ticketsControllers.selectContactsFromDB(req.userInfo)
+  let responseMessage = ''
+  let responseClass = ''
+
+  if (req.query.mc == '200') {
+    responseMessage = 'پاسخ تیکت با موفقیت ذخیره شد'
+    responseClass = 'alert-success'
+  } else if (req.query.mc == '200') {
+    responseMessage = 'خطا در ذخیره پاسخ تیکت. لطفا دوباره تلاش کنید!'
+    responseClass = 'alert-danger'
+  }
+
+  res.render('tickets', {
+    responseMessage: responseMessage,
+    responseClass: responseClass,
+    tickets: ticketsInfo
+  })
+})
+
+router.post('/tickets', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+  req.body.userID = req.userInfo.userID
+  let updateStatus = await ticketsControllers.updateContactInDB(req.body)
+  if (updateStatus) {
+    res.redirect('/users/tickets?mc=200')
+    return
+  }
+  res.redirect('/users/tickets?mc=400')
 })
 
 // GET logout

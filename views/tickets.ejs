@@ -142,10 +142,43 @@
 		</div>
 	  </div>
       <div class="main">
-          <p>Tickets</p>
-      </div>
-      <!-- loader END -->
-      <!-- Backend Bundle JavaScript -->
+		<div class="col">
+			<h3 class="text-center header-top-margin">تیکت ها</h3>
+			<div class="modal-body header-top-margin">
+				<% if (responseMessage.length > 0) { %>
+					<p class="col-md-6 mb-3 text-right <%= responseClass %>"><%= responseMessage %></p>
+				<% } %>
+				<% for (var i = 0; i < tickets.length; i++) { %>
+				<form action="/users/tickets" method="POST">
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label type="text" id="author" name="author" class="form-control text-right"><%= tickets[i].author %></label>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label type="text" id="sender" name="sender" class="form-control text-right" style="direction: rtl;"><%= tickets[i].sender %></label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 mb-3">
+							<label class="form-control text-right" id="message" name="message"><%= tickets[i].message %></label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 mb-3">
+							<textarea class="form-control text-right" id="response" name="response" placeholder="پاسخ تیکت را یادداشت کنید..."><%= tickets[i].response %></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input style="display: none;" id="ticketID" name="ticketID" value="<%= tickets[i]._id %>"/>
+						<button type="submit" class="btn btn-primary">ارسال پاسخ</button>
+					</div>
+				</form>
+				<% } %>
+			</div>
+		</div>
+	</div>
+	<!-- loader END -->
+	<!-- Backend Bundle JavaScript -->
 	<script src="../assets/js/backend-bundle.min.js"></script>
 
 	<!-- Flextree Javascript-->
