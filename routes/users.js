@@ -1,6 +1,18 @@
 var express = require('express');
 var router = express.Router();
-
+var multer = require('multer');
+var fs = require('fs');
+ 
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    }
+});
+ 
+var upload = multer({ storage: storage });
 
 // Utils functions
 var hashingUtil = require('../utils/hashing');
@@ -83,7 +95,7 @@ router.post('/login', async function(req, res, next) {
 
   let loginStatus = await usersControllers.selectUserFromDB(loginObj)
 
-  if (loginStatus) {
+  if (loginStatus.password == loginObj.password) {
     let token = await authorizationMiddleware.generateJWT(loginStatus)
     console.log(token)
     res.cookie('pi_token', token)
@@ -98,27 +110,32 @@ router.post('/login', async function(req, res, next) {
 
 // GET dashboard page content
 router.get('/dashboard', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+  let userInfo = await usersControllers.selectUserFromDB(req.userInfo)
   let profileInfo = await profileControllers.selectProfileFromDB(req.userInfo.userID)
+  let historyInfo = await historyControllers.selectHistoryFromDB(req.userInfo.userID)
+
   res.render('dashboard', {
-    firstName: profileInfo.user.firstName,
-    lastName: profileInfo.user.lastName,
-    phoneNumber: profileInfo.phoneNumber,
-    birthdayDate: profileInfo.birthdayDate,
-    email: profileInfo.user.email,
-    biography: profileInfo.biography,
-    photoAddress: profileInfo.photoAddress,
-    btnStatus: profileInfo.birthdayDate.length > 0 ||
+    userID: req.userInfo.userID,
+    job: historyInfo ? historyInfo.job : ' ',
+    firstName: userInfo ? userInfo.firstName : '',
+    lastName: userInfo ? userInfo.lastName : '',
+    phoneNumber: profileInfo ? profileInfo.phoneNumber : '',
+    birthdayDate: profileInfo ? profileInfo.birthdayDate : '',
+    email: userInfo ? userInfo.email : '',
+    biography: profileInfo ? profileInfo.biography : '',
+    photoAddress: profileInfo ? profileInfo.photoAddress : '',
+    btnStatus: profileInfo ? (profileInfo.birthdayDate.length > 0 ||
               profileInfo.phoneNumber.length > 0 ||
-              profileInfo.biography.length > 0 ? true : false
+              profileInfo.biography.length > 0 ? true : false) : false
   })
 })
 
 // POST dashboard page content
-router.post('/dashboard', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+router.post('/dashboard', upload.single('photoAddress'), authorizationMiddleware.verifyJWT, async function(req, res, next) {
   let profileObj = req.body
   let insertStatus = false
   profileObj.userID = req.userInfo.userID
-  if (req.body.btnStatus) {
+  if (req.body.btnStatus == 'true') {
     insertStatus = await profileControllers.updateProfileInDB(profileObj)
     insertStatus = await usersControllers.updateUserInDB(profileObj)
     if (insertStatus) {
@@ -126,6 +143,10 @@ router.post('/dashboard', authorizationMiddleware.verifyJWT, async function(req,
       console.log(token)
       res.cookie('pi_token', token)
     }
+    
+    fs.rename(req.file.path, req.file.path.replace(req.file.originalname, req.userInfo.userID) + '_profile.png', function(err) {
+      if ( err ) console.log('ERROR: ' + err);
+    });
   } else {
     insertStatus = await profileControllers.insertProfileToDB(profileObj)
   }
@@ -139,8 +160,13 @@ router.post('/dashboard', authorizationMiddleware.verifyJWT, async function(req,
 
 // GET history page content
 router.get('/history', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+  let userInfo = await usersControllers.selectUserFromDB(req.userInfo)
   let historyInfo = await historyControllers.selectHistoryFromDB(req.userInfo.userID)
+  
   res.render('history', {
+    userID: req.userInfo.userID,
+    firstName: userInfo ? userInfo.firstName : '',
+    lastName: userInfo ? userInfo.lastName : '',
     grade: historyInfo ? historyInfo.grade : '',
     major: historyInfo ? historyInfo.major : '',
     university: historyInfo ? historyInfo.university : '',
@@ -191,7 +217,10 @@ router.delete('/history', authorizationMiddleware.verifyJWT, async function(req,
 
 // GET blogs page content
 router.get('/blogs', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+  let userInfo = await usersControllers.selectUserFromDB(req.userInfo)
   let blogsInfo = await blogControllers.selectBlogsFromDB(req.userInfo.userID)
+  let historyInfo = await historyControllers.selectHistoryFromDB(req.userInfo.userID)
+
   let blogInfo = {
     title: '',
     content: '',
@@ -201,6 +230,10 @@ router.get('/blogs', authorizationMiddleware.verifyJWT, async function(req, res,
     blogInfo = await blogControllers.selectBlogFromDB(req.userInfo.userID, req.query.id)
   }
   res.render('blogs', {
+    userID: req.userInfo.userID,
+    firstName: userInfo ? userInfo.firstName : '',
+    lastName: userInfo ? userInfo.lastName : '',
+    job: historyInfo ? historyInfo.job : ' ',
     blogs: blogsInfo,
     blog: blogInfo,
     btnStatus: blogInfo.title.length > 0 ||
@@ -237,7 +270,9 @@ router.get('/blogs/:blogID', authorizationMiddleware.verifyJWT, async function(r
 
 // GET tickets page content
 router.get('/tickets', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+  let userInfo = await usersControllers.selectUserFromDB(req.userInfo)
   let ticketsInfo = await ticketsControllers.selectContactsFromDB(req.userInfo)
+  let historyInfo = await historyControllers.selectHistoryFromDB(req.userInfo.userID)
   let responseMessage = ''
   let responseClass = ''
 
@@ -250,6 +285,10 @@ router.get('/tickets', authorizationMiddleware.verifyJWT, async function(req, re
   }
 
   res.render('tickets', {
+    userID: req.userInfo.userID,
+    firstName: userInfo ? userInfo.firstName : '',
+    lastName: userInfo ? userInfo.lastName : '',
+    job: historyInfo ? historyInfo.job : ' ',
     responseMessage: responseMessage,
     responseClass: responseClass,
     tickets: ticketsInfo

@@ -25,8 +25,8 @@ var insertBlogToDB = async function(blogObj) {
 var selectBlogFromDB = async function(userID, blogID) {
     try {
         return BlogsModel.findOne({
-            user: userID,
-            _id: blogID
+            user: mongoose.Types.ObjectId(userID),
+            _id: mongoose.Types.ObjectId(blogID)
         })
         .then(data => {
             return data
@@ -106,8 +106,38 @@ var deleteBlogFromDB = async function(userID, blogID) {
     }
 }
 
+var insertCommentsToDB = async function(obj) {
+    try {
+        let comment = {
+            author: obj.author,
+            message: obj.comment
+        };
+
+        return BlogsModel.updateOne({
+            _id: mongoose.Types.ObjectId(obj.blogID)
+        }, {
+            $addToSet: {
+                comments: comment
+            }
+        }).then(data => {
+            console.log(data)
+            if (data.nModified == 1) {
+                return true
+            }
+            return false
+        }).catch(err => {
+            console.log(err)
+            return false
+        })
+    } catch(err) {
+        console.log('EXCEPTION: ' + err)
+        return null
+    }
+}
+
 module.exports.insertBlogToDB = insertBlogToDB
 module.exports.selectBlogFromDB = selectBlogFromDB;
 module.exports.selectBlogsFromDB = selectBlogsFromDB;
 module.exports.updateBlogInDB = updateBlogInDB;
 module.exports.deleteBlogFromDB = deleteBlogFromDB;
+module.exports.insertCommentsToDB = insertCommentsToDB;

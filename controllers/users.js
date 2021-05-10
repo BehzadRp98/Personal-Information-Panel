@@ -26,7 +26,6 @@ var selectUserFromDB = async function(obj) {
     try {
         return UsersModel.findOne({
             email: obj.email,
-            password: obj.password
         }).then(data => {
             console.log(data.email)
             return data

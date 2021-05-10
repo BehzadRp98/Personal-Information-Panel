@@ -62,7 +62,7 @@
             <span class="job"><%= job %></span>
         </div>
         <figure class="profile-image">
-            <img src="../indexAssets/../indexAssets/images/profile.jpg" alt="">
+            <img src="uploads/<%= userID %>_profile.png" alt="">
         </figure>
         <ul class="profile-information">
             <li></li>
@@ -104,7 +104,6 @@
                 <div class="col-md-4 col-sm-4 col-xs-8 dynamic">
                     <a href="/users/login" class="pull-right site-btn icon hidden-xs">ورود <i class="fa fa-sign-in"
                                                                                   aria-hidden="true"></i></a>
-                    </button>
                     <div class="hamburger pull-right hidden-lg hidden-md"><i class="fa fa-bars"
                                                                              aria-hidden="true"></i></div>
                     <div class="hidden-md social-icons pull-right">
@@ -143,108 +142,31 @@
                 <div class="row">
                     <section class="blog col-md-12 bottom_30">
                         <div class="col-md-12 content-header">
-                            <div class="section-title top_30 bottom_15"><span></span><h2>ارسال های وبلاگ</h2></div>
+                            <div class="section-title top_30 bottom_15"><span></span><h2>پست ها</h2></div>
                         </div>
                         <div id="grid-blog" class="row">
                             <!-- a blog -->
-                            <div class="cbp-item">
-                                <a href="blog-posts/blog-1.html" class="blog-box">
-                                    <div class="blog-img">
-                                        <img src="../indexAssets/images/blogs/blog-6.jpg" alt="">
-                                    </div>
-                                    <div class="blog-box-info">
-                                        <span class="category">عمومی</span>
-                                        <h2 class="title">از فضای کاری فعلی من دیدن کنید</h2>
-                                        <p class="little-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است،.</p>
-                                        <span class="date">1399 دی</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <!-- a blog -->
-                            <div class="cbp-item">
-                                <a href="blog-posts/blog-video-version.html" class="blog-box">
-                                    <div class="blog-img">
-                                        <img src="../indexAssets/images/blogs/blog-2.jpg" alt="">
-                                    </div>
-                                    <div class="blog-box-info">
-                                        <span class="category">طراحی وب سایت</span>
-                                        <h2 class="title">چگونه می توان یک طراح وب شد؟</h2>
-                                        <p class="little-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
-                                        <span class="date"> دی 1399</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <!-- a blog -->
-                            <div class="cbp-item">
-                                <a href="blog-posts/blog-music-version.html" class="blog-box">
-                                    <div class="blog-img">
-                                        <img src="../indexAssets/images/blogs/blog-3.jpg" alt="">
-                                    </div>
-                                    <div class="blog-box-info">
-                                        <span class="category">رابط کاربر</span>
-                                        <h2 class="title">چرا شب کار بهتر است؟</h2>
-                                        <p class="little-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
-                                        <span class="date">دی 2390</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <!-- a blog -->
-                            <div class="cbp-item">
-                                <a href="blog-posts/blog-video-version.html" class="blog-box">
-                                    <div class="blog-img">
-                                        <img src="../indexAssets/images/blogs/blog-4.jpg" alt="">
-                                    </div>
-                                    <div class="blog-box-info">
-                                        <span class="category">عکاسی</span>
-                                        <h2 class="title">آیا می توانید همه جا کار کنید؟</h2>
-                                        <p class="little-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
-                                        <span class="date">28 دی 1390</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <!-- a blog -->
-                            <div class="cbp-item">
-                                <a href="blog-posts/blog-1.html" class="blog-box">
-                                    <div class="blog-img">
-                                        <img src="../indexAssets/images/blogs/blog-5.jpg" alt="">
-                                    </div>
-                                    <div class="blog-box-info">
-                                        <span class="category">دیگر</span>
-                                        <h2 class="title">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</h2>
-                                        <p class="little-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
-                                        <span class="date">19 دی 1390</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <!-- a blog -->
-                            <div class="cbp-item">
-                                <a href="blog-posts/blog-1.html" class="blog-box">
-                                    <div class="blog-img">
-                                        <img src="../indexAssets/images/blogs/blog-6.jpg" alt="">
-                                    </div>
-                                    <div class="blog-box-info">
-                                        <span class="category">فضای کاری</span>
-                                        <h2 class="title">من در حال شروع یک پروژه جدید.</h2>
-                                        <p class="little-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
-                                        <span class="date">1دی1390</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- load more button -->
-                        <div id="load-posts" class="cbp-l-loadMore-button top_60">
-                            <a href="load-more/blog-posts.html" class="cbp-l-loadMore-link site-btn" rel="nofollow">
-                                <span class="cbp-l-loadMore-defaultText">بارگذاری بیشتر (<span class="cbp-l-loadMore-loadItems">3</span>)</span>
-                                <span class="cbp-l-loadMore-loadingText">بارگذاری...</span>
-                                <span class="cbp-l-loadMore-noMoreLoading">دیگر کار نمی کند</span>
-                            </a>
+                            <% blogs.forEach(function(post) { %>
+                                <div class="cbp-item">
+                                    <a href="/blog/<%= post._id %>" class="blog-box">
+                                        <div class="blog-img">
+                                            <img src="../indexAssets/images/blogs/blog-6.jpg" alt="">
+                                        </div>
+                                        <div class="blog-box-info">
+                                            <!-- <span class="category">عمومی</span> -->
+                                            <h2 class="title"><%= post.title %></h2>
+                                            <p class="little-text"><%= post.content.substring(0, 40) %></p>
+                                            <span class="date"><%= post.date1 %></span>
+                                        </div>
+                                    </a>
+                                </div>
+                            <% }); %>
                         </div>
                     </section>
                 </div>
             </div>
-
         </div><!-- Content - End -->
-     </div> <!-- col-md-12 end -->
+    </div> <!-- col-md-12 end -->
 </div><!-- row end -->
 <!-- Footer
 ================================================== -->

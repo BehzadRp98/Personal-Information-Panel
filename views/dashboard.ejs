@@ -77,9 +77,9 @@
 	<div class="sidenav">
 		<div class="profile-header">
 			<div class="cover-container ">
-				<img src="../assets/images/user/1.jpg" alt="profile-bg" class="image-center rounded avatar-120">
-				<h3 class="text-center">حمزه سهرابی</h3>
-				<p class="text-center mb-1">وب دیزاینر</p>
+				<img src="/uploads/<%= userID %>_profile.png" alt="<%= photoAddress %>" class="image-center rounded avatar-120">
+				<h3 class="text-center"><%= firstName %> <%= lastName %></h3>
+				<p class="text-center mb-1"><%= job %></p>
 				<br/>
 			</div>
 			<div class="col align-items-center">
@@ -147,7 +147,7 @@
 		<div class="col">
 			<h3 class="text-center header-top-margin">حساب کاربری</h3>
 			<div class="modal-body header-top-margin">
-				<form action="/users/dashboard" method="POST">
+				<form action="/users/dashboard" method="POST" enctype="multipart/form-data">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<input type="text" id="firstName" name="firstName" class="form-control" value='<%= firstName %>' placeholder="نام">
@@ -166,7 +166,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12 mb-3">
-							<input type="email" id="email" name="email" class="form-control" value='<%= email %>' placeholder="ایمیل" disabled='true'>
+							<input type="email" id="email" name="email" class="form-control" value='<%= email %>' placeholder="ایمیل">
 						</div>
 					</div>
 					<div class="row">
