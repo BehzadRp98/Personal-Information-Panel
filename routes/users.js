@@ -16,6 +16,7 @@ var upload = multer({ storage: storage });
 
 // Utils functions
 var hashingUtil = require('../utils/hashing');
+var emailUtil = require('../utils/email');
 
 // Controllers functions
 var usersControllers = require('../controllers/users');
@@ -122,6 +123,9 @@ router.get('/dashboard', authorizationMiddleware.verifyJWT, async function(req, 
     phoneNumber: profileInfo ? profileInfo.phoneNumber : '',
     birthdayDate: profileInfo ? profileInfo.birthdayDate : '',
     email: userInfo ? userInfo.email : '',
+    website: profileInfo && profileInfo.website ? profileInfo.website : '',
+    telegram: profileInfo && profileInfo.telegram ? profileInfo.telegram : '',
+    instagram: profileInfo && profileInfo.website ? profileInfo.instagram : '',
     biography: profileInfo ? profileInfo.biography : '',
     photoAddress: profileInfo ? profileInfo.photoAddress : '',
     btnStatus: profileInfo ? (profileInfo.birthdayDate.length > 0 ||
@@ -133,6 +137,10 @@ router.get('/dashboard', authorizationMiddleware.verifyJWT, async function(req, 
 // POST dashboard page content
 router.post('/dashboard', upload.single('photoAddress'), authorizationMiddleware.verifyJWT, async function(req, res, next) {
   let profileObj = req.body
+
+  req.body.instagram = req.body.instagram.length > 0 && !String(req.body.instagram).includes('https') ? `https://instagram.com/${req.body.instagram}` : req.body.instagram
+  req.body.telegram = req.body.telegram.length > 0 && !String(req.body.telegram).includes('https') ? `https://tlgrm.in/${req.body.telegram}` : req.body.telegram
+
   let insertStatus = false
   profileObj.userID = req.userInfo.userID
   if (req.body.btnStatus == 'true') {
@@ -144,12 +152,15 @@ router.post('/dashboard', upload.single('photoAddress'), authorizationMiddleware
       res.cookie('pi_token', token)
     }
     
-    fs.rename(req.file.path, req.file.path.replace(req.file.originalname, req.userInfo.userID) + '_profile.png', function(err) {
-      if ( err ) console.log('ERROR: ' + err);
-    });
-  } else {
-    insertStatus = await profileControllers.insertProfileToDB(profileObj)
+    try {
+      fs.rename(req.file.path, req.file.path.replace(req.file.originalname, req.userInfo.userID) + '_profile.png', function(err) {
+        if ( err ) console.log('ERROR: ' + err);
+      });
+    } catch(err) {
+      console.log(err)
+    }
   }
+  insertStatus = await profileControllers.insertProfileToDB(profileObj)
   if (insertStatus) {
     console.log('Ok')
   } else {
@@ -299,6 +310,14 @@ router.post('/tickets', authorizationMiddleware.verifyJWT, async function(req, r
   req.body.userID = req.userInfo.userID
   let updateStatus = await ticketsControllers.updateContactInDB(req.body)
   if (updateStatus) {
+    let ticketInfo = await ticketsControllers.selectContactsByIDFromDB(req.body)
+    let obj = {
+      email: ticketInfo.sender,
+      question: ticketInfo.message,
+      answer: ticketInfo.response,
+      userInfo: req.userInfo
+    }
+    emailUtil.sendVerificationEmail(obj)
     res.redirect('/users/tickets?mc=200')
     return
   }

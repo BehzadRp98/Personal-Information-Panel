@@ -39,6 +39,22 @@ var selectContactsFromDB = async function(obj) {
     }
 }
 
+var selectContactsByIDFromDB = async function(obj) {
+    try {
+        return ContactsModel.findOne({
+            _id: mongoose.Types.ObjectId(obj.ticketID)
+        }).then(data => {
+            return data
+        }).catch(err => {
+            console.log(err)
+            return null
+        })
+    } catch(err) {
+        console.log('EXCEPTION: ' + err)
+        return null
+    }
+}
+
 var updateContactInDB = async function(obj) {
     try {
         return ContactsModel.updateOne({
@@ -67,4 +83,5 @@ var updateContactInDB = async function(obj) {
 
 module.exports.insertContactToDB = insertContactToDB;
 module.exports.selectContactsFromDB = selectContactsFromDB;
+module.exports.selectContactsByIDFromDB =selectContactsByIDFromDB;
 module.exports.updateContactInDB = updateContactInDB;

@@ -8,7 +8,10 @@ const ProfileSchema = new mongoose.Schema({
     phoneNumber: String,
     birthdayDate: String,
     biography: String,
-    photoAddress: String
+    photoAddress: String,
+    website: String,
+    telegram: String,
+    instagram: String
 })
 
 var ProfileModel = mongoose.model('Profile', ProfileSchema)

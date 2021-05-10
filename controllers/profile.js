@@ -9,7 +9,10 @@ var insertProfileToDB = async function(profileObj) {
             phoneNumber: profileObj.phoneNumber,
             birthdayDate: profileObj.birthdayDate,
             biography: profileObj.biography,
-            photoAddress: profileObj.photoAddress
+            photoAddress: profileObj.photoAddress,
+            website: profileObj.website,
+            telegram: profileObj.telegram,
+            instagram: profileObj.instagram
         })
 
         return newProfile.save().then(data => {
@@ -51,7 +54,10 @@ var updateProfileInDB = async function(obj) {
                 phoneNumber: obj.phoneNumber,
                 birthdayDate: obj.birthdayDate,
                 biography: obj.biography,
-                photoAddress: obj.photoAddress
+                photoAddress: obj.photoAddress,
+                website: obj.website,
+                telegram: obj.telegram,
+                instagram: obj.instagram
             }
         })
         .then(data => {

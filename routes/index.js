@@ -24,9 +24,12 @@ router.get('/home', async function(req, res, next) {
     email: profileInfo.user.email,
     birthdayDate: profileInfo.birthdayDate,
     biography: profileInfo.biography,
+    website: profileInfo.website,
+    telegram: profileInfo.telegram,
+    instagram: profileInfo.instagram,
     job: historyInfo.job,
     ability: historyInfo.ability,
-    myRange: historyInfo.myRange
+    myRange: historyInfo.myRange,
   });
 })
 
@@ -40,6 +43,9 @@ router.get('/resume', async function(req, res, next) {
     lastName: profileInfo.user.lastName,
     email: profileInfo.user.email,
     birthdayDate: profileInfo.birthdayDate,
+    website: profileInfo.website,
+    telegram: profileInfo.telegram,
+    instagram: profileInfo.instagram,
     grade: historyInfo.grade,
     major: historyInfo.major,
     university: historyInfo.university,
@@ -84,6 +90,9 @@ router.get('/blog', async function(req, res, next) {
     lastName: profileInfo.user.lastName,
     email: profileInfo.user.email,
     birthdayDate: profileInfo.birthdayDate,
+    website: profileInfo.website,
+    telegram: profileInfo.telegram,
+    instagram: profileInfo.instagram,
     job: historyInfo.job,
     blogs: blogsInfo
   })
@@ -108,6 +117,9 @@ router.get('/blog/:id', async function(req, res, next) {
     lastName: profileInfo.user.lastName,
     email: profileInfo.user.email,
     birthdayDate: profileInfo.birthdayDate,
+    website: profileInfo.website,
+    telegram: profileInfo.telegram,
+    instagram: profileInfo.instagram,
     job: historyInfo.job,
     blogs: blogsInfo,
     post: blogInfo
@@ -146,6 +158,9 @@ router.get('/contact', async function(req, res, next) {
     email: profileInfo.user.email,
     phoneNumber: profileInfo.phoneNumber,
     birthdayDate: profileInfo.birthdayDate,
+    website: profileInfo.website,
+    telegram: profileInfo.telegram,
+    instagram: profileInfo.instagram,
     job: historyInfo.job,
   })
 })
