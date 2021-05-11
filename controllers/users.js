@@ -39,6 +39,22 @@ var selectUserFromDB = async function(obj) {
     }
 }
 
+var selectUsersFromDB = async function() {
+    try {
+        return UsersModel.find({})
+        .then(data => {
+            console.log(data.email)
+            return data
+        }).catch(err => {
+            console.log(err)
+            return null
+        })
+    } catch (err) {
+        console.log('EXCEPTION: ' + err)
+        return null
+    }
+}
+
 var updateUserInDB = async function(obj) {
     try {
         return UsersModel.updateOne({
@@ -67,4 +83,5 @@ var updateUserInDB = async function(obj) {
 
 module.exports.insertUserToDB = insertUserToDB;
 module.exports.selectUserFromDB = selectUserFromDB;
+module.exports.selectUsersFromDB = selectUsersFromDB;
 module.exports.updateUserInDB = updateUserInDB;

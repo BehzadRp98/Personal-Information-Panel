@@ -6,19 +6,28 @@ var usersControllers = require('../controllers/users');
 var profileControllers = require('../controllers/profile');
 var historyControllers = require('../controllers/history');
 var blogControllers = require('../controllers/blogs');
+var commentControllers = require('../controllers/comments');
 var contactControllers = require('../controllers/contact');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', async function(req, res, next) {
+  let admins = await usersControllers.selectUsersFromDB()
+  for (let a in admins) {
+    let temp = await historyControllers.selectHistoryFromDB(admins[a]._id)
+    admins[a].job = temp && temp.job ? temp.job : ''
+    console.log('')
+  }
+  res.render('index', {
+    admins: admins
+  });
 });
 
 router.get('/home', async function(req, res, next) {
-  let profileInfo = await profileControllers.selectProfileFromDB('608ec71b7a5f960e340f6d41')
-  let historyInfo = await historyControllers.selectHistoryFromDB('608ec71b7a5f960e340f6d41')
+  let profileInfo = await profileControllers.selectProfileFromDB(req.query.id)
+  let historyInfo = await historyControllers.selectHistoryFromDB(req.query.id)
 
   res.render('home', {
-    userID: '608ec71b7a5f960e340f6d41',
+    userID: req.query.id,
     firstName: profileInfo.user.firstName,
     lastName: profileInfo.user.lastName,
     email: profileInfo.user.email,
@@ -34,11 +43,11 @@ router.get('/home', async function(req, res, next) {
 })
 
 router.get('/resume', async function(req, res, next) {
-  let profileInfo = await profileControllers.selectProfileFromDB('608ec71b7a5f960e340f6d41')
-  let historyInfo = await historyControllers.selectHistoryFromDB('608ec71b7a5f960e340f6d41')
+  let profileInfo = await profileControllers.selectProfileFromDB(req.query.id)
+  let historyInfo = await historyControllers.selectHistoryFromDB(req.query.id)
 
   res.render('resume', {
-    userID: '608ec71b7a5f960e340f6d41',
+    userID: req.query.id,
     firstName: profileInfo.user.firstName,
     lastName: profileInfo.user.lastName,
     email: profileInfo.user.email,
@@ -59,23 +68,10 @@ router.get('/resume', async function(req, res, next) {
   })
 })
 
-// router.get('/portfolio', async function(req, res, next) {
-//   let profileInfo = await profileControllers.selectProfileFromDB('608ec71b7a5f960e340f6d41')
-//   let historyInfo = await historyControllers.selectHistoryFromDB('608ec71b7a5f960e340f6d41')
-
-//   res.render('portfolio', {
-//     firstName: profileInfo.user.firstName,
-//     lastName: profileInfo.user.lastName,
-//     email: profileInfo.user.email,
-//     birthdayDate: profileInfo.birthdayDate,
-//     job: historyInfo.job,
-//   })
-// })
-
 router.get('/blog', async function(req, res, next) {
-  let profileInfo = await profileControllers.selectProfileFromDB('608ec71b7a5f960e340f6d41')
-  let historyInfo = await historyControllers.selectHistoryFromDB('608ec71b7a5f960e340f6d41')
-  let blogsInfo = await blogControllers.selectBlogsFromDB('608ec71b7a5f960e340f6d41')
+  let profileInfo = await profileControllers.selectProfileFromDB(req.query.id)
+  let historyInfo = await historyControllers.selectHistoryFromDB(req.query.id)
+  let blogsInfo = await blogControllers.selectBlogsFromDB(req.query.id)
 
   for (let i in blogsInfo) {
     let temp = blogsInfo[i].date
@@ -85,7 +81,7 @@ router.get('/blog', async function(req, res, next) {
   }
 
   res.render('blog', {
-    userID: '608ec71b7a5f960e340f6d41',
+    userID: req.query.id,
     firstName: profileInfo.user.firstName,
     lastName: profileInfo.user.lastName,
     email: profileInfo.user.email,
@@ -99,10 +95,11 @@ router.get('/blog', async function(req, res, next) {
 })
 
 router.get('/blog/:id', async function(req, res, next) {
-  let profileInfo = await profileControllers.selectProfileFromDB('608ec71b7a5f960e340f6d41')
-  let historyInfo = await historyControllers.selectHistoryFromDB('608ec71b7a5f960e340f6d41')
-  let blogInfo = await blogControllers.selectBlogFromDB('608ec71b7a5f960e340f6d41', req.params.id)
-  let blogsInfo = await blogControllers.selectBlogsFromDB('608ec71b7a5f960e340f6d41')
+  let profileInfo = await profileControllers.selectProfileFromDB(req.query.id)
+  let historyInfo = await historyControllers.selectHistoryFromDB(req.query.id)
+  let blogInfo = await blogControllers.selectBlogFromDB(req.query.id, req.params.id)
+  let blogsInfo = await blogControllers.selectBlogsFromDB(req.query.id)
+  let commentsInfo = await commentControllers.selectCommentsFromDB(req.params.id)
   
   for (let i in blogsInfo) {
     let temp = blogsInfo[i].date
@@ -112,7 +109,7 @@ router.get('/blog/:id', async function(req, res, next) {
   }
 
   res.render('blog-page', {
-    userID: '608ec71b7a5f960e340f6d41',
+    userID: req.query.id,
     firstName: profileInfo.user.firstName,
     lastName: profileInfo.user.lastName,
     email: profileInfo.user.email,
@@ -122,22 +119,29 @@ router.get('/blog/:id', async function(req, res, next) {
     instagram: profileInfo.instagram,
     job: historyInfo.job,
     blogs: blogsInfo,
-    post: blogInfo
+    post: blogInfo,
+    comments: commentsInfo
   })
 })
 
 router.post('/comment/:id', async function(req, res, next) {
   req.body.blogID = req.params.id
-  let insertCommentStatus = await blogControllers.insertCommentsToDB(req.body)
+  let insertCommentStatus = false
+
+  if (req.body.commentID.length > 0) {
+    insertCommentStatus = await commentControllers.insertReplyToDB(req.body)
+  } else {
+    insertCommentStatus = await commentControllers.insertCommentToDB(req.body)
+  }
 
   if (insertCommentStatus) {
-    res.redirect(`/blog/${req.params.id}`)
+    res.redirect(`/blog/${req.params.id}?id=${req.query.id}`)
   }
 })
 
 router.get('/contact', async function(req, res, next) {
-  let profileInfo = await profileControllers.selectProfileFromDB('608ec71b7a5f960e340f6d41')
-  let historyInfo = await historyControllers.selectHistoryFromDB('608ec71b7a5f960e340f6d41')
+  let profileInfo = await profileControllers.selectProfileFromDB(req.query.id)
+  let historyInfo = await historyControllers.selectHistoryFromDB(req.query.id)
   let responseMessage = ''
   let responseClass = ''
 
@@ -150,7 +154,7 @@ router.get('/contact', async function(req, res, next) {
   }
 
   res.render('contact', {
-    userID: '608ec71b7a5f960e340f6d41',
+    userID: req.query.id,
     responseMessage: responseMessage,
     responseClass: responseClass,
     firstName: profileInfo.user.firstName,
@@ -166,7 +170,7 @@ router.get('/contact', async function(req, res, next) {
 })
 
 router.post('/contact', async function(req, res, next) {
-  req.body.userID = '608ec71b7a5f960e340f6d41'
+  req.body.userID = req.query.id
   let status = await contactControllers.insertContactToDB(req.body)
   if (status) {
     res.redirect('/contact?mc=200')

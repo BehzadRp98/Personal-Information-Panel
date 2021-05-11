@@ -141,6 +141,14 @@ router.post('/dashboard', upload.single('photoAddress'), authorizationMiddleware
   req.body.instagram = req.body.instagram.length > 0 && !String(req.body.instagram).includes('https') ? `https://instagram.com/${req.body.instagram}` : req.body.instagram
   req.body.telegram = req.body.telegram.length > 0 && !String(req.body.telegram).includes('https') ? `https://tlgrm.in/${req.body.telegram}` : req.body.telegram
 
+  try {
+    fs.rename(req.file.path, req.file.path.replace(req.file.originalname, req.userInfo.userID) + '_profile.png', function(err) {
+      if ( err ) console.log('ERROR: ' + err);
+    });
+  } catch(err) {
+    console.log(err)
+  }
+
   let insertStatus = false
   profileObj.userID = req.userInfo.userID
   if (req.body.btnStatus == 'true') {
@@ -151,15 +159,8 @@ router.post('/dashboard', upload.single('photoAddress'), authorizationMiddleware
       console.log(token)
       res.cookie('pi_token', token)
     }
-    
-    try {
-      fs.rename(req.file.path, req.file.path.replace(req.file.originalname, req.userInfo.userID) + '_profile.png', function(err) {
-        if ( err ) console.log('ERROR: ' + err);
-      });
-    } catch(err) {
-      console.log(err)
-    }
   }
+
   insertStatus = await profileControllers.insertProfileToDB(profileObj)
   if (insertStatus) {
     console.log('Ok')

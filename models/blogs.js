@@ -12,16 +12,6 @@ const BlogsSchema = new mongoose.Schema({
     },
     content: String,
     title: String,
-
-    comments: [{
-        author: String,
-        message: String,
-        date: {
-            type: Date,
-            default: moment().locale('en').format('YYYY-MM-DD')
-        },
-    }]
-
 })
 
 var BlogsModel = mongoose.model('Blogs', BlogsSchema)

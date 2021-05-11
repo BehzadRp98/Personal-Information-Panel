@@ -38,6 +38,12 @@
     <![endif]-->
     <link rel="stylesheet" href="https://cdn.rawgit.com/morteza/bootstrap-rtl/v3.3.4/dist/css/bootstrap-rtl.min.css">
     <link rel="stylesheet" href="../indexAssets/css/rtl.css"/>
+    
+    <style>
+        .aHover:hover {
+            cursor: pointer;
+        }
+    </style>
 
 </head>
 <body>
@@ -90,9 +96,10 @@
                             <div class="col-md-8 col-sm-8 col-xs-4">
                                 <ul class="tabs">
                                     <li class="tab">
-                                        <a class="home-btn" href="/home"><i class="fa fa-home" aria-hidden="true"></i></a>
+                                        <a class="home-btn" href="/home?id=<%= userID %>"><i class="fa fa-home" aria-hidden="true"></i></a>
                                     </li>
-                                    <li class="tab"><a href="/blog">بازگشت به وبلاگ</a></li>
+                                    <li class="tab"><a href="/blog?id=<%= userID %>">بازگشت به وبلاگ</a></li>
+                                    <li class="tab"><a href="/">ادمین ها</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-8 dynamic">
@@ -100,10 +107,9 @@
                                     aria-hidden="true"></i></a>
                                 <div class="hamburger pull-right hidden-lg hidden-md"><i class="fa fa-bars" aria-hidden="true"></i></div>
                                 <div class="hidden-md social-icons pull-right">
-                                    <a class="fb" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                    <a class="tw" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    <a class="ins" href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                    <a class="dr" href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                                    <a class="tw" href="<%= telegram %>"><i class="fa fa-telegram" aria-hidden="true"></i></a>
+                                    <a class="ins" href="<%= instagram %>"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                    <a class="dr" href="<%= website %>"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -146,19 +152,37 @@
                                 <div class="section-title bottom_30 top_60"><span></span><h2>ارسال نظرات</h2></div>
                                 <ul>
                                     <!-- a comment -->
-                                    <% post.comments.forEach(function(comment) { %>
+                                    <% comments.forEach(function(comment) { %>
                                         <li>
                                             <div class="row">
-                                                <div class="col-md-2 col-sm-2 col-xs-3 person-img">
-                                                    <!-- <img src="../images/person.jpg" alt=""> -->
-                                                </div>
                                                 <div class="col-md-10 col-sm-10 col-xs-9 comment-content">
                                                     <div class="name"><%= comment.author %></div>
                                                     <span class="date"><%= comment.date1 %></span>
                                                     <p><%= comment.message %></p>
-                                                    <a href="#"><i class="fa fa-reply" aria-hidden="true"></i>پاسخ</a>
+                                                    <a class="aHover" onclick="setCommentID('<%= comment._id %>')">
+                                                        <i class="fa fa-reply" aria-hidden="true"></i>پاسخ
+                                                    </a>
+
+                                                    <script>
+                                                        function setCommentID(id) {
+                                                            document.getElementById("commentID").value = id;
+                                                            document.getElementById("author").focus();
+                                                        }
+                                                    </script>
                                                 </div>
                                             </div>
+                                            <% comment.reply.forEach(function(rpl) { %>
+                                                <div class="col-md-2 col-sm-2 col-xs-3 person-img">
+                                                    <!-- <img src="../images/person.jpg" alt=""> -->
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-10 col-sm-10 col-xs-9 comment-content">
+                                                        <div class="name"><%= rpl.author %></div>
+                                                        <span class="date"><%= rpl.date1 %></span>
+                                                        <p><%= rpl.message %></p>
+                                                    </div>
+                                                </div>
+                                            <% }); %>
                                         </li>
                                     <% }); %>
                                 </ul>
@@ -171,7 +195,7 @@
                                             <input class="site-input" type="input" id="author" name="author" placeholder="نام">
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="site-input" type="input" id="email" name="email" placeholder="ایمیل">
+                                            <input class="site-input" type="input" id="commentID" name="commentID" hidden="true">
                                         </div>
                                         <div class="col-md-12">
                                             <textarea class="site-area" id="comment" name="comment" placeholder="نطر خود را یادداشت کنید"></textarea>
