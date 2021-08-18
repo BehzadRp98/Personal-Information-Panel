@@ -36,9 +36,9 @@ router.get('/home', async function(req, res, next) {
     website: profileInfo.website,
     telegram: profileInfo.telegram,
     instagram: profileInfo.instagram,
-    job: historyInfo.job,
-    ability: historyInfo.ability,
-    myRange: historyInfo.myRange,
+    job: historyInfo == null ? 'ثبت نشده' : historyInfo.job,
+    ability: historyInfo == null ? 'ثبت نشده' : historyInfo.ability,
+    myRange: historyInfo == null ? 'ثبت نشده' : historyInfo.myRange,
   });
 })
 
@@ -55,16 +55,16 @@ router.get('/resume', async function(req, res, next) {
     website: profileInfo.website,
     telegram: profileInfo.telegram,
     instagram: profileInfo.instagram,
-    grade: historyInfo.grade,
-    major: historyInfo.major,
-    university: historyInfo.university,
-    endYear: historyInfo.endYear,
-    eduDescription: historyInfo.eduDescription,
-    job: historyInfo.job,
-    post: historyInfo.post,
-    place: historyInfo.place,
-    expYear: historyInfo.expYear,
-    wDescription: historyInfo.wDescription,
+    grade: historyInfo == null ? 'ثبت نشده' : historyInfo.grade,
+    major: historyInfo == null ? 'ثبت نشده' : historyInfo.major,
+    university: historyInfo == null ? 'ثبت نشده' : historyInfo.university,
+    endYear: historyInfo == null ? 'ثبت نشده' : historyInfo.endYear,
+    eduDescription: historyInfo == null ? 'ثبت نشده' : historyInfo.eduDescription,
+    job: historyInfo == null ? 'ثبت نشده' : historyInfo.job,
+    post: historyInfo == null ? 'ثبت نشده' : historyInfo.post,
+    place: historyInfo == null ? 'ثبت نشده' : historyInfo.place,
+    expYear: historyInfo == null ? 'ثبت نشده' : historyInfo.expYear,
+    wDescription: historyInfo == null ? 'ثبت نشده' : historyInfo.wDescription,
   })
 })
 
@@ -89,12 +89,16 @@ router.get('/blog', async function(req, res, next) {
     website: profileInfo.website,
     telegram: profileInfo.telegram,
     instagram: profileInfo.instagram,
-    job: historyInfo.job,
-    blogs: blogsInfo
+    job: historyInfo == null ? 'ثبت نشده' : historyInfo.job,
+    blogs: blogsInfo.length == 0 ? [] : blogsInfo
   })
 })
 
 router.get('/blog/:id', async function(req, res, next) {
+  if (req.query.id == undefined) {
+    res.send('');
+    return;
+  }
   let profileInfo = await profileControllers.selectProfileFromDB(req.query.id)
   let historyInfo = await historyControllers.selectHistoryFromDB(req.query.id)
   let blogInfo = await blogControllers.selectBlogFromDB(req.query.id, req.params.id)
@@ -117,7 +121,7 @@ router.get('/blog/:id', async function(req, res, next) {
     website: profileInfo.website,
     telegram: profileInfo.telegram,
     instagram: profileInfo.instagram,
-    job: historyInfo.job,
+    job: historyInfo == null ? 'ثبت نشده' : historyInfo.job,
     blogs: blogsInfo,
     post: blogInfo,
     comments: commentsInfo
@@ -146,7 +150,7 @@ router.get('/contact', async function(req, res, next) {
   let responseClass = ''
 
   if (req.query.mc == '200') {
-    responseMessage = 'تیکت شما با موفقیت ایجاد شد!'
+    responseMessage = 'تیکت شما با موفقیت ارسال شد!'
     responseClass = 'alert-success'
   } else if (req.query.mc == '400') {
     responseMessage = 'خطا در ذخیره تیکت. لطفا دوباره تلاش کنید!'
@@ -165,7 +169,7 @@ router.get('/contact', async function(req, res, next) {
     website: profileInfo.website,
     telegram: profileInfo.telegram,
     instagram: profileInfo.instagram,
-    job: historyInfo.job,
+    job: historyInfo == null ? 'ثبت نشده' : historyInfo.job,
   })
 })
 
@@ -173,9 +177,10 @@ router.post('/contact', async function(req, res, next) {
   req.body.userID = req.query.id
   let status = await contactControllers.insertContactToDB(req.body)
   if (status) {
-    res.redirect('/contact?mc=200')
+    res.redirect(`/contact?id=${req.query.id}&mc=200`)
+    return
   }
-  res.redirect('/contact?mc=400')
+  res.redirect(`/contact?id=${req.query.id}&mc=400`)
 })
 
 module.exports = router;

@@ -125,12 +125,15 @@ router.get('/dashboard', authorizationMiddleware.verifyJWT, async function(req, 
     email: userInfo ? userInfo.email : '',
     website: profileInfo && profileInfo.website ? profileInfo.website : '',
     telegram: profileInfo && profileInfo.telegram ? profileInfo.telegram : '',
-    instagram: profileInfo && profileInfo.website ? profileInfo.instagram : '',
+    instagram: profileInfo && profileInfo.instagram ? profileInfo.instagram : '',
     biography: profileInfo ? profileInfo.biography : '',
     photoAddress: profileInfo ? profileInfo.photoAddress : '',
     btnStatus: profileInfo ? (profileInfo.birthdayDate.length > 0 ||
               profileInfo.phoneNumber.length > 0 ||
-              profileInfo.biography.length > 0 ? true : false) : false
+              profileInfo.biography.length > 0 || 
+              profileInfo.telegram.length > 0 || 
+              profileInfo.instagram.length > 0 || 
+              profileInfo.website.length > 0 ? true : false) : false
   })
 })
 

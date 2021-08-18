@@ -34,7 +34,7 @@ const sendVerificationEmail = function(obj) {
         }
 
         sendmail({
-            from: 'no-reply@yourdomain.com',
+            from: obj.userInfo.email,
             to: obj.email,
             subject: obj.userInfo.firstName + ' ' + obj.userInfo.lastName,
             html: htmlToSend
@@ -42,8 +42,9 @@ const sendVerificationEmail = function(obj) {
             if (err) {
                 console.log('email not send')
                 console.log(err)
+            } else {
+                console.log('email send')
             }
-            console.log('email send')
         })
     })
 }

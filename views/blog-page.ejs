@@ -127,16 +127,10 @@
                         <!--Blog Post-->
                         <div class="col-md-8 post">
                             <div class="post-content">
-                                <h1 class="blog-title bottom_30 top_30">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</h1>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
-                                <br>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
-                                <br>
-                                <blockquote>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است. </blockquote>
-                                <br>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
-                                <br>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
+                                <h1 class="blog-title bottom_30 top_30"><%= post.title %></h1>
+                                <p>
+                                    
+                                </p>
                             </div>
                             <div class="tags top_30">
                                 <span>برچسب ها:</span>
@@ -189,7 +183,7 @@
                             </div>
                             <div class="leave-comment">
                                 <div class="section-title bottom_30 top_60"><span></span><h2>پیام بگذارید</h2></div>
-                                <form class="site-form" action="/comment/<%= post._id %>" method="POST">
+                                <form class="site-form" action="/comment/<%= post._id %>?id=<%= userID %>" method="POST">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <input class="site-input" type="input" id="author" name="author" placeholder="نام">
@@ -216,7 +210,7 @@
                                     <!-- a post -->
                                     <% blogs.forEach(function(post) { %>
                                         <li>
-                                            <a href="/blog/<%= post._id %>">
+                                            <a href="/blog/<%= post._id %>?id=<%= userID %>">
                                                 <div class="info"><%= post.title %><span><%= post.date1 %></span></div>
                                                 <p class="little-text"><%= post.content.substring(0, 20) %></p>
                                             </a>
