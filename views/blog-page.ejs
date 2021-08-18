@@ -4,7 +4,7 @@
 
     <!-- Simple Page Needs
     ================================================== -->
-    <title>Mat</title>
+    <title><%= post.title %></title>
     <meta charset="UTF-8">
     <meta name="description" content="Mat - Resume & vCard HTML Template">
     <meta name="keywords" content="personal, vcard, portfolio">
@@ -128,9 +128,8 @@
                         <div class="col-md-8 post">
                             <div class="post-content">
                                 <h1 class="blog-title bottom_30 top_30"><%= post.title %></h1>
-                                <p>
-                                    
-                                </p>
+                                <textarea id="about" name="about" hidden="true"><%= post.content %></textarea>
+                                <div id="container"></div>
                             </div>
                             <div class="tags top_30">
                                 <span>برچسب ها:</span>
@@ -211,8 +210,9 @@
                                     <% blogs.forEach(function(post) { %>
                                         <li>
                                             <a href="/blog/<%= post._id %>?id=<%= userID %>">
-                                                <div class="info"><%= post.title %><span><%= post.date1 %></span></div>
-                                                <p class="little-text"><%= post.content.substring(0, 20) %></p>
+                                                <div class="info"><%= post.title %></div>
+                                                <div class="info"><span><%= post.date1 %></span></div>
+                                                <!-- <p class="little-text"><%= post.content.substring(0, 20) %></p> -->
                                             </a>
                                         </li>
                                     <% }); %>
@@ -249,6 +249,10 @@
 <!-- <script src="js/jquery.cookie-1.4.1.min.js"></script> -->
 <!-- <script src="js/Demo.js"></script> -->
 <!-- <link rel="stylesheet" href="css/Demo.min.css" /> -->
-
+<script>
+    $('document').ready(function () {
+        $('#container').html($('#about').val());
+    })
+</script>
 </body>
 </html>
