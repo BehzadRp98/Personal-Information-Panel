@@ -196,14 +196,35 @@ router.get('/history', authorizationMiddleware.verifyJWT, async function(req, re
     wDescription: historyInfo ? historyInfo.wDescription : '',
 
     // Abilities
-    ability: historyInfo ? historyInfo.ability : '',
-    myRange: historyInfo ? historyInfo.myRange : '0',
+    ability1: historyInfo && historyInfo.ability[0] ? historyInfo.ability[0] : '',
+    ability2: historyInfo && historyInfo.ability[1] ? historyInfo.ability[1] : '',
+    ability3: historyInfo && historyInfo.ability[2] ? historyInfo.ability[2] : '',
+    ability4: historyInfo && historyInfo.ability[3] ? historyInfo.ability[3] : '',
+    myRange1: historyInfo && historyInfo.myRange[0] ? historyInfo.myRange[0] : '0',
+    myRange2: historyInfo && historyInfo.myRange[1] ? historyInfo.myRange[1] : '0',
+    myRange3: historyInfo && historyInfo.myRange[2] ? historyInfo.myRange[2] : '0',
+    myRange4: historyInfo && historyInfo.myRange[3] ? historyInfo.myRange[3] : '0',
     btnStatus: historyInfo == null ? false : true
   })
 })
 
 // POST history page content
 router.post('/history', authorizationMiddleware.verifyJWT, async function(req, res, next) {
+  let ability = []
+  let myRange = []
+  ability.push(req.body.ability1);
+  ability.push(req.body.ability2);
+  ability.push(req.body.ability3);
+  ability.push(req.body.ability4);
+
+  myRange.push(req.body.myRange1);
+  myRange.push(req.body.myRange2);
+  myRange.push(req.body.myRange3);
+  myRange.push(req.body.myRange4);
+
+  req.body.ability = ability
+  req.body.myRange = myRange
+
   let historyObj = req.body
   let insertStatus = false
   historyObj.userID = req.userInfo.userID

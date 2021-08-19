@@ -21,8 +21,8 @@ const HistorySchema = new mongoose.Schema({
     wDescription: String,
 
     // Abilities
-    ability: String,
-    myRange: String
+    ability: [],
+    myRange: []
 })
 
 var HistoryModel = mongoose.model('History', HistorySchema)
