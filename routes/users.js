@@ -300,6 +300,7 @@ router.get('/blogs/:blogID', authorizationMiddleware.verifyJWT, async function(r
   let deleteStatus = await blogControllers.deleteBlogFromDB(req.userInfo.userID, req.params.blogID)
   if (deleteStatus) {
     res.redirect('/users/blogs')
+    return;
   }
   res.send(400)
 })
@@ -313,10 +314,10 @@ router.get('/tickets', authorizationMiddleware.verifyJWT, async function(req, re
   let responseClass = ''
 
   if (req.query.mc == '200') {
-    responseMessage = 'پاسخ تیکت با موفقیت ذخیره شد'
+    responseMessage = 'پاسخ تیکت با موفقیت ارسال شد'
     responseClass = 'alert-success'
   } else if (req.query.mc == '200') {
-    responseMessage = 'خطا در ذخیره پاسخ تیکت. لطفا دوباره تلاش کنید!'
+    responseMessage = 'خطا در ارسال پاسخ تیکت. لطفا دوباره تلاش کنید!'
     responseClass = 'alert-danger'
   }
 
