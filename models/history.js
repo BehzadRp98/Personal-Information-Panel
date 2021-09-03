@@ -7,22 +7,24 @@ const HistorySchema = new mongoose.Schema({
     },
 
     // Educational History
-    grade: String,
-    major: String,
-    university: String,
-    endYear: String,
-    eduDescription: String,
+    university: [],
+    // grade: String,
+    // major: String,
+    // university: String,
+    // endYear: String,
+    // eduDescription: String,
 
     // Perofessional History
-    job: String,
-    post: String,
-    place: String,
-    expYear: String,
-    wDescription: String,
+    job: [],
+    // job: String,
+    // post: String,
+    // place: String,
+    // expYear: String,
+    // wDescription: String,
 
     // Abilities
     ability: [],
-    myRange: []
+    // myRange: []
 })
 
 var HistoryModel = mongoose.model('History', HistorySchema)

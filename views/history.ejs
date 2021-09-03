@@ -2,386 +2,435 @@
 <html lang="fa">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>رزومه</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>رزومه</title>
 
-	<!-- Favicon -->
-	<link rel="shortcut icon" href="../assets/images/favicon.ico" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/images/favicon.ico" />
 
-	<link rel="stylesheet" href="../assets/css/backend.css?v=1.0.1">
-	<link rel="stylesheet" href="../assets/vendor/%40fortawesome/fontawesome-free/css/all.min.css">
-	<link rel="stylesheet" href="../assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
-	<link rel="stylesheet" href="../assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.css">
-	<link rel="stylesheet" href="../assets/vendor/remixicon/fonts/remixicon.css">
-	<link rel="stylesheet" href="../assets/vendor/%40icon/dripicons/dripicons.css">
+    <link rel="stylesheet" href="../assets/css/backend.css?v=1.0.1">
+    <link rel="stylesheet" href="../assets/vendor/%40fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" href="../assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.css">
+    <link rel="stylesheet" href="../assets/vendor/remixicon/fonts/remixicon.css">
+    <link rel="stylesheet" href="../assets/vendor/%40icon/dripicons/dripicons.css">
 
-	<!-- <link rel='stylesheet' href='../assets/vendor/fullcalendar/core/main.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- <link rel='stylesheet' href='../assets/vendor/fullcalendar/core/main.css' />
 	<link rel='stylesheet' href='../assets/vendor/fullcalendar/daygrid/main.css' />
 	<link rel='stylesheet' href='../assets/vendor/fullcalendar/timegrid/main.css' />
 	<link rel='stylesheet' href='../assets/vendor/fullcalendar/list/main.css' />
 	<link rel="stylesheet" href="../assets/vendor/mapbox/mapbox-gl.css"> -->
-	<style>		
-		.sidenav {
-		  height: 100%;
-		  width: 20%;
-		  position: fixed;
-		  z-index: 1;
-		  top: 0;
-		  right: 0;
-		  background-color: white;
-		  overflow: scroll;
-		  padding-top: 20px;
-		}
-		
-		.button-background {
-			background-color: #ffc500;
-		}
-
-		a {
-			color: black;
-		}
-
-		.sidenav .button-background:hover {
-			background-color: #ffb100 !important;
-		}
-
-		.header-top-margin {
-			margin-top: 20px;
-		}
-
-		.image-center {
-			display: block;
-			margin-left: auto;
-			margin-right: auto;
-		}
-
-		.main {
-		  margin-right: 20%; /* Same as the width of the sidenav */
-		  padding: 0px 10px;
-		}
-
-		.horizontal_line {
-			margin: 5px;
-    		height: 2px;
-			background-color: #ffb100 !important;
-		}
-		
-		.slidecontainer {
-			width: 100%;
-		  }
-		  
-		  .slider {
-			-webkit-appearance: none;
-			width: 100%;
-			height: 10px;
-			border-radius: 5px;
-			border: 1px solid #ffb100;
-			background-color: #ffb100;
-			outline: none;
-			opacity: 0.7;
-			-webkit-transition: .2s;
-			transition: opacity .2s;
-		  }
-		  
-		  .slider:hover {
-			opacity: 1;
-		  }
-		  
-		  .slider::-webkit-slider-thumb {
-			-webkit-appearance: none;
-			appearance: none;
-			width: 25px;
-			height: 25px;
-			border-radius: 50%;
-			background: black;
-			cursor: pointer;
-		  }
-		  
-		  .slider::-moz-range-thumb {
-			width: 25px;
-			height: 25px;
-			border-radius: 50%;
-			background: #4CAF50;
-			cursor: pointer;
-		  }
-
-		@media screen and (max-height: 450px) {
-		  .sidenav {padding-top: 15px;}
-		  .sidenav a {font-size: 18px;}
-		}
-	</style>
+    <style>
+        .sidenav {
+            height: 100%;
+            width: 20%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: white;
+            overflow: scroll;
+            padding-top: 20px;
+        }
+        
+        .button-background {
+            background-color: #ffc500;
+        }
+        
+        a {
+            color: black;
+        }
+        
+        .sidenav .button-background:hover {
+            background-color: #ffb100 !important;
+        }
+        
+        .header-top-margin {
+            margin-top: 20px;
+        }
+        
+        .image-center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .main {
+            margin-right: 20%;
+            /* Same as the width of the sidenav */
+            padding: 0px 10px;
+        }
+        
+        .horizontal_line {
+            margin: 5px;
+            height: 2px;
+            background-color: #ffb100 !important;
+        }
+        
+        .slidecontainer {
+            width: 100%;
+        }
+        
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            border: 1px solid #ffb100;
+            background-color: #ffb100;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+        
+        .slider:hover {
+            opacity: 1;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: black;
+            cursor: pointer;
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+        
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 
 <body class="dahboard-2  ">
-	<!-- loader Start -->
-	<div id="loading">
-		<div id="loading-center">
-		</div>
-	</div>
-	<div class="sidenav">
-		<div class="profile-header">
-			<div class="cover-container ">
-				<img src="/uploads/<%= userID %>_profile.png" alt="" class="image-center rounded avatar-120">
-				<h3 class="text-center"><%= firstName %> <%= lastName %></h3>
-				<p class="text-center mb-1"><%= job %></p>
-				<br/>
-			</div>
-			<div class="col align-items-center">
-				<div class="col-lg-12 col-md-12 col-12">
-					<div class="profile-details text-center">
-						<a href="/users/dashboard" class="iq-sub-card button-background rounded-small p-2">
-							<div class="rounded iq-card-icon-small">
-								<i class="ri-file-user-line"></i>
-							</div>
-							<br>
-							حساب کاربری
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-12  col-md-12 col-12">
-					<div class="profile-details text-center">
-						<a href="/users/history" class="iq-sub-card button-background rounded-small p-2">
-							<div class="rounded iq-card-icon-small">
-								<i class="ri-profile-line"></i>
-							</div>
-							<br>
-							سوابق
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-12 col-md-12 col-12">
-					<div class="profile-details text-center">
-						<a href="/users/blogs" class="iq-sub-card button-background rounded-small p-2">
-							<div class="rounded iq-card-icon-small">
-								<i class="ri-article-line"></i>
-							</div>
-							<br>
-							بلاگ ها
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-12 col-md-12 col-12">
-					<div class="profile-details text-center">
-						<a href="/users/tickets" class="iq-sub-card button-background rounded-small p-2">
-							<div class="rounded iq-card-icon-small">
-								<i class="ri-message-2-line"></i>
-							</div>
-							<br>
-							تیکت ها
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-12 col-md-12 col-12">
-					<div class="profile-details text-center">
-						<a href="/users/logout" class="iq-sub-card button-background rounded-small p-2">
-							<div class="rounded iq-card-icon-small">
-								<i class="ri-logout-box-line"></i>
-							</div>
-							<br>
-							خروج از حساب
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	  </div>
-      <!-- loader END -->
-	<!-- Wrapper Start -->
-	<div class="main">
-		<div class="col">
-			<h3 class="text-center header-top-margin">سوابق</h3>
-			<div class="modal-body header-top-margin">
-				<p class="text-right header-top-margin"><b>سوابق تحصیلی</b></p>
-				<form action="/users/history" method="POST">
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<input type="text" id="grade" name="grade" class="form-control" value="<%= grade %>" placeholder="مقطع تحصیلی">
-						</div>
-						<div class="col-md-6 mb-3">
-							<input type="text" id="major" name="major" class="form-control" value="<%= major %>" placeholder="رشته تحصیلی">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3">
-							<input type="text" id="university" name="university" value="<%= university %>" class="form-control" placeholder="موسسه آموزشی">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<input type="text" id="endYear" name="endYear" value="<%= endYear %>" class="form-control" placeholder="سال فارغ التحصیلی">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3">
-							<textarea class="form-control" id="eduDescription" name="eduDescription" placeholder="توضیحات"><%= eduDescription %></textarea>
-						</div>
-					</div>
-
-					<div class="horizontal_line"></div>
-
-					<p class="text-right header-top-margin"><b>سوابق کاری</b></p>
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<input type="text" id="job" name="job" value="<%= job %>" class="form-control" placeholder="شغل">
-						</div>
-						<div class="col-md-6 mb-3">
-							<input type="text" id="post" name="post" value="<%= post %>" class="form-control" placeholder="سِمت">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3">
-							<input type="text" id="place" name="place" value="<%= place %>" class="form-control" placeholder="محل کار">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<input type="text" id="expYear" name="expYear" value="<%= expYear %>" class="form-control" placeholder="مدت زمان فعالیت">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3">
-							<textarea class="form-control" id="wDescription" name="wDescription" placeholder="توضیحات"><%= wDescription %></textarea>
-						</div>
-					</div>
-
-					<div class="horizontal_line"></div>
-
-					<p class="text-right header-top-margin"><b>مهارت ها</b></p>
-					<div class="row">
-						<div class="col-md-12 mb-3">
-							<input type="text" id="ability1" name="ability1" value="<%= ability1 %>" class="form-control" placeholder="عنوان مهارت">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3 range">
-							<div class="slidecontainer">
-								<input type="range" min="0" max="100" value="<%= myRange1 %>" class="slider" id="myRange1" name="myRange1">
-								<p>میزان: <span id="demo1"></span>%</p>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3">
-							<input type="text" id="ability2" name="ability2" value="<%= ability2 %>" class="form-control" placeholder="عنوان مهارت">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3 range">
-							<div class="slidecontainer">
-								<input type="range" min="0" max="100" value="<%= myRange2 %>" class="slider" id="myRange2" name="myRange2">
-								<p>میزان: <span id="demo2"></span>%</p>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3">
-							<input type="text" id="ability3" name="ability3" value="<%= ability3 %>" class="form-control" placeholder="عنوان مهارت">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3 range">
-							<div class="slidecontainer">
-								<input type="range" min="0" max="100" value="<%= myRange3 %>" class="slider" id="myRange3" name="myRange3">
-								<p>میزان: <span id="demo3"></span>%</p>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3">
-							<input type="text" id="ability4" name="ability4" value="<%= ability4 %>" class="form-control" placeholder="عنوان مهارت">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3 range">
-							<div class="slidecontainer">
-								<input type="range" min="0" max="100" value="<%= myRange4 %>" class="slider" id="myRange4" name="myRange4">
-								<p>میزان: <span id="demo4"></span>%</p>
-							</div>
-						</div>
-					</div>
-					<input type="text" style="display: none;" id="btnStatus" name="btnStatus" value='<%= btnStatus %>'>
-					<div class="modal-footer">
-						<% if (!btnStatus) { %>
-							<button type="submit" class="btn btn-primary">ذخیره</button>
-						<% } else { %>
-							<button type="submit" class="btn btn-primary">بروزرسانی</button>
-							<button type="submit" class="btn btn-primary" disabled="true">حذف</button>
-						<% } %>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<!-- Wrapper End-->
+    <!-- loader Start -->
+    <div id="loading">
+        <div id="loading-center">
+        </div>
+    </div>
+    <div class="sidenav">
+        <div class="profile-header">
+            <div class="cover-container ">
+                <img src="/uploads/<%= userID %>_profile.png" alt="" class="image-center rounded avatar-120">
+                <h3 class="text-center">
+                    <%= firstName %>
+                        <%= lastName %>
+                </h3>
+                <p class="text-center mb-1">
+                    <%= job %>
+                </p>
+                <br/>
+            </div>
+            <div class="col align-items-center">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="profile-details text-center">
+                        <a href="/users/dashboard" class="iq-sub-card button-background rounded-small p-2">
+                            <div class="rounded iq-card-icon-small">
+                                <i class="ri-file-user-line"></i>
+                            </div>
+                            <br> حساب کاربری
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-12  col-md-12 col-12">
+                    <div class="profile-details text-center">
+                        <a href="/users/history" class="iq-sub-card button-background rounded-small p-2">
+                            <div class="rounded iq-card-icon-small">
+                                <i class="ri-profile-line"></i>
+                            </div>
+                            <br> سوابق
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="profile-details text-center">
+                        <a href="/users/blogs" class="iq-sub-card button-background rounded-small p-2">
+                            <div class="rounded iq-card-icon-small">
+                                <i class="ri-article-line"></i>
+                            </div>
+                            <br> بلاگ ها
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="profile-details text-center">
+                        <a href="/users/tickets" class="iq-sub-card button-background rounded-small p-2">
+                            <div class="rounded iq-card-icon-small">
+                                <i class="ri-message-2-line"></i>
+                            </div>
+                            <br> تیکت ها
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="profile-details text-center">
+                        <a href="/users/logout" class="iq-sub-card button-background rounded-small p-2">
+                            <div class="rounded iq-card-icon-small">
+                                <i class="ri-logout-box-line"></i>
+                            </div>
+                            <br> خروج از حساب
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- loader END -->
-	<script>
-		var slider1 = document.getElementById("myRange1");
-		var output1 = document.getElementById("demo1");
-		output1.innerHTML = slider1.value;
-		
-		slider1.oninput = function() {
-		  output1.innerHTML = this.value;
-		}
+    <!-- Wrapper Start -->
+    <div class="main">
+        <div class="col">
+            <h3 class="text-center header-top-margin">سوابق</h3>
+            <div class="modal-body header-top-margin">
+                <p class="text-right header-top-margin"><b>سوابق تحصیلی</b></p>
+                <form action="/users/history" method="POST">
+                    <% universities.forEach(function(university, index) { %>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" id="grade<%= index + 1 %>" name="grade<%= index + 1 %>" class="form-control" value="<%= university.grade %>" placeholder="مقطع تحصیلی">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="text" id="major<%= index + 1 %>" name="major<%= index + 1 %>" class="form-control" value="<%= university.major %>" placeholder="رشته تحصیلی">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <input type="text" id="university<%= index + 1 %>" name="university<%= index + 1 %>" value="<%= university.university %>" class="form-control" placeholder="موسسه آموزشی">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" id="endYear<%= index + 1 %>" name="endYear<%= index + 1 %>" value="<%= university.endYear %>" class="form-control" placeholder="سال فارغ التحصیلی">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <textarea class="form-control" id="eduDescription<%= index + 1 %>" name="eduDescription<%= index + 1 %>" placeholder="توضیحات"><%= university.eduDescription %></textarea>
+                            </div>
+                        </div>
+                    <% }); %>
 
-		var slider2 = document.getElementById("myRange2");
-		var output2 = document.getElementById("demo2");
-		output2.innerHTML = slider2.value;
-		
-		slider2.oninput = function() {
-		  output2.innerHTML = this.value;
-		}
+                    <div id="newUniversityId"></div>
+                    <div id="dynamicCheck" class="mb-3">
+                        <input type="button" class="btn btn-primary bg-green" value="افزودن سابقه تحصیلی" onclick="createNewUniversity();" />
+                    </div>
 
-		var slider3 = document.getElementById("myRange3");
-		var output3 = document.getElementById("demo3");
-		output3.innerHTML = slider3.value;
-		
-		slider3.oninput = function() {
-		  output3.innerHTML = this.value;
-		}
+                    <div class="horizontal_line"></div>
 
-		var slider4 = document.getElementById("myRange4");
-		var output4 = document.getElementById("demo4");
-		output4.innerHTML = slider4.value;
-		
-		slider4.oninput = function() {
-		  output4.innerHTML = this.value;
-		}
-	</script>
-    <!-- Backend Bundle JavaScript -->  
-	<script src="../assets/js/backend-bundle.min.js"></script>
+                    <p class="text-right header-top-margin"><b>سوابق کاری</b></p>
+                    <% jobs.forEach(function(job, index) { %>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" id="job<%= index + 1 %>" name="job<%= index + 1 %>" value="<%= job.job %>" class="form-control" placeholder="شغل">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="text" id="post<%= index + 1 %>" name="post<%= index + 1 %>" value="<%= job.post %>" class="form-control" placeholder="سِمت">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <input type="text" id="place<%= index + 1 %>" name="place<%= index + 1 %>" value="<%= job.place %>" class="form-control" placeholder="محل کار">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" id="expYear<%= index + 1 %>" name="expYear<%= index + 1 %>" value="<%= job.expYear %>" class="form-control" placeholder="مدت زمان فعالیت">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <textarea class="form-control" id="wDescription<%= index + 1 %>" name="wDescription<%= index + 1 %>" placeholder="توضیحات"><%= job.wDescription %></textarea>
+                            </div>
+                        </div>
+                    <% }); %>
+                    <div id="newJobId"></div>
+                    <div id="dynamicCheck" class="mb-3">
+                        <input type="button" class="btn btn-primary bg-green" value="افزودن سابقه کاری" onclick="createNewJob();" />
+                    </div>
 
-	<!-- Flextree Javascript-->
-	<script src="../assets/js/flex-tree.min.js"></script>
-	<script src="../assets/js/tree.js"></script>
+                    <div class="horizontal_line"></div>
 
-	<!-- Table Treeview JavaScript -->
-	<script src="../assets/js/table-treeview.js"></script>
+                    <p class="text-right header-top-margin"><b>مهارت ها</b></p>
+                        <% abilities.forEach(function(ability, index) { %>
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <input type="text" id="ability<%= index + 1 %>" name="ability<%= index + 1 %>" value="<%= ability.name %>" class="form-control" placeholder="عنوان مهارت">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 mb-3 range">
+                                    <div class="slidecontainer">
+                                        <input type="range" min="0" max="100" value="<%= ability.myRange %>" class="slider" id="myRange<%= index + 1 %>" name="myRange<%= index + 1 %>">
+                                        <p>میزان: <span id="demo<%= index + 1 %>"></span>%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <div id="newElementId"></div>
+                    <div id="dynamicCheck" class="mb-3">
+                        <input type="button" class="btn btn-primary bg-green" value="افزودن مهارت" onclick="createNewElement();" />
+                    </div>
 
-	<!-- Masonary Gallery Javascript -->
-	<script src="../assets/js/masonry.pkgd.min.js"></script>
-	<script src="../assets/js/imagesloaded.pkgd.min.js"></script>
+                    <input type="text" style="display: none;" id="btnStatus" name="btnStatus" value='<%= btnStatus %>'>
+                    <input type="text" style="display: none;" id="abilitiesCount" name="abilitiesCount" value='<%= abilitiesCount %>'>
+                    <input type="text" style="display: none;" id="universitiesCount" name="universitiesCount" value='<%= universitiesCount %>'>
+                    <input type="text" style="display: none;" id="jobsCount" name="jobsCount" value='<%= jobsCount %>'>
+                    <div class="modal-footer">
+                        <% if (!btnStatus) { %>
+                            <button type="submit" class="btn btn-primary">ذخیره</button>
+                            <% } else { %>
+                                <button type="submit" class="btn btn-primary">بروزرسانی</button>
+                                <button type="submit" class="btn btn-primary" disabled="true">حذف</button>
+                                <% } %>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Wrapper End-->
+    <!-- loader END -->
+    <script>
+    var counter = 0
+        $( document ).ready(function() {
+            console.log(<% abilities %>)
+            counter = Number($('#abilitiesCount').val());
+            universitiesCount = Number($('#universitiesCount').val());
+            jobsCount = Number($('#jobsCount').val());
+            for (let i = 0; i < counter; i++) {
+                var slider = document.getElementById(`myRange${i + 1}`);
+                var output = document.getElementById(`demo${i + 1}`);
+                output.innerHTML = slider ? slider.value : "0";
 
-	<!-- Mapbox Javascript -->
-	<script src="../assets/js/mapbox-gl.js"></script>
-	<script src="../assets/js/mapbox.js"></script>
+                slider.oninput = function() {
+                    output.innerHTML = this.value;
+                }
+            }
+        });
+    </script>
+    <!-- Backend Bundle JavaScript -->
+    <script src="../assets/js/backend-bundle.min.js"></script>
 
-	<!-- SweetAlert JavaScript -->
-	<script src="../assets/js/sweetalert.js"></script>
+    <!-- Flextree Javascript-->
+    <script src="../assets/js/flex-tree.min.js"></script>
+    <script src="../assets/js/tree.js"></script>
 
-	<!-- Vectoe Map JavaScript -->
-	<script src="../assets/js/vector-map-custom.js"></script>
+    <!-- Table Treeview JavaScript -->
+    <script src="../assets/js/table-treeview.js"></script>
 
-	<!-- Chart Custom JavaScript -->
-	<script src="../assets/js/customizer.js"></script>
+    <!-- Masonary Gallery Javascript -->
+    <script src="../assets/js/masonry.pkgd.min.js"></script>
+    <script src="../assets/js/imagesloaded.pkgd.min.js"></script>
 
-	<!-- Chart Custom JavaScript -->
-	<script src="../assets/js/chart-custom.js"></script>
+    <!-- Mapbox Javascript -->
+    <script src="../assets/js/mapbox-gl.js"></script>
+    <script src="../assets/js/mapbox.js"></script>
 
-	<!-- slider JavaScript -->
-	<script src="../assets/js/slider.js"></script>
+    <!-- SweetAlert JavaScript -->
+    <script src="../assets/js/sweetalert.js"></script>
 
-	<!-- app JavaScript -->
-	<script src="../assets/js/app.js"></script>
+    <!-- Vectoe Map JavaScript -->
+    <script src="../assets/js/vector-map-custom.js"></script>
+
+    <!-- Chart Custom JavaScript -->
+    <script src="../assets/js/customizer.js"></script>
+
+    <!-- Chart Custom JavaScript -->
+    <script src="../assets/js/chart-custom.js"></script>
+
+    <!-- slider JavaScript -->
+    <script src="../assets/js/slider.js"></script>
+
+    <!-- app JavaScript -->
+    <script src="../assets/js/app.js"></script>
+
+    <script type="text/JavaScript">
+        function createNewElement() {
+            counter = counter + 1
+            var txtNewInputBox = document.createElement('div');
+            txtNewInputBox.innerHTML = `<div class="row"> <div class="col-md-12 mb-3"> <input type="text" id="ability${counter}" name="ability${counter}" class="form-control" placeholder="عنوان مهارت"> </div> </div> <div class="row"> <div class="col-md-12 mb-3 range"> <div class="slidecontainer"> <input type="range" min="0" max="100" value="0" class="slider" id="myRange${counter}" name="myRange${counter}"> <p>میزان: <span id="demo${counter}"></span>%</p> </div> </div> </div>`;
+            document.getElementById("newElementId").appendChild(txtNewInputBox); 
+            var slider = document.getElementById(`myRange${counter}`);
+            var output = document.getElementById(`demo${counter}`);
+            output.innerHTML = slider ? slider.value : "0";
+
+            slider.oninput = function() {
+                output.innerHTML = this.value;
+            }
+        }
+        function createNewUniversity() {
+            universitiesCount = universitiesCount + 1;
+            var txtNewInputBox = document.createElement('div');
+            txtNewInputBox.innerHTML = `<div class="row">
+                        <div class="col-md-6 mb-3">
+                            <input type="text" id="grade${universitiesCount}" name="grade${universitiesCount}" class="form-control" placeholder="مقطع تحصیلی">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <input type="text" id="major${universitiesCount}" name="major${universitiesCount}" class="form-control" placeholder="رشته تحصیلی">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <input type="text" id="university${universitiesCount}" name="university${universitiesCount}" class="form-control" placeholder="موسسه آموزشی">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <input type="text" id="endYear${universitiesCount}" name="endYear${universitiesCount}" class="form-control" placeholder="سال فارغ التحصیلی">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <textarea class="form-control" id="eduDescription${universitiesCount}" name="eduDescription${universitiesCount}" placeholder="توضیحات"></textarea>
+                        </div>
+                    </div>`;
+            document.getElementById("newUniversityId").appendChild(txtNewInputBox);
+        }
+        function createNewJob() {
+            jobsCount = jobsCount + 1;
+            var txtNewInputBox = document.createElement('div');
+            txtNewInputBox.innerHTML = `<div class="row">
+                        <div class="col-md-6 mb-3">
+                            <input type="text" id="job${jobsCount}" name="job${jobsCount}" class="form-control" placeholder="شغل">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <input type="text" id="post${jobsCount}" name="post${jobsCount}" class="form-control" placeholder="سِمت">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <input type="text" id="place${jobsCount}" name="place${jobsCount}" class="form-control" placeholder="محل کار">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <input type="text" id="expYear${jobsCount}" name="expYear${jobsCount}" class="form-control" placeholder="مدت زمان فعالیت">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <textarea class="form-control" id="wDescription${jobsCount}" name="wDescription${jobsCount}" placeholder="توضیحات"></textarea>
+                        </div>
+                    </div>`;
+            document.getElementById("newJobId").appendChild(txtNewInputBox); 
+        }
+    </script>
 </body>
+
 </html>

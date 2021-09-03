@@ -152,12 +152,14 @@
                                     <li><i class="fa fa-suitcase" aria-hidden="true"></i>
                                         <h2 class="timeline-title">رزومه تاریخچه کار</h2></li>
                                     <!-- a work -->
-                                    <li><h3 class="line-title"><%= post %> - <%= place %></h3>
-                                        <span><%= expYear %> سال</span>
-                                        <p class="little-text">
-                                            <%= wDescription %>
-                                        </p>
-                                    </li>
+                                    <% jobs.forEach(function(job, index) { %>
+                                        <li><h3 class="line-title"><%= job.post %> - <%= job.place %></h3>
+                                            <span><%= job.expYear %></span>
+                                            <p class="little-text">
+                                                <%= job.wDescription %>
+                                            </p>
+                                        </li>
+                                    <% }) %>
                                     <!-- a work -->
                                     <!-- <li><h3 class="line-title">طراح ارشد - Google</h3>
                                         <span>2008 - 2010</span>
@@ -180,12 +182,14 @@
                                     <li><i class="fa fa-graduation-cap" aria-hidden="true"></i>
                                         <h2 class="timeline-title">تاریخچه آموزش</h2></li>
                                     <!-- a work -->
-                                    <li><h3 class="line-title"><%= university %></h3>
-                                        <span>فارغ التحصیل در سال <%= endYear %> مقطع <%= grade %> رشته <%= major %></span>
-                                        <p class="little-text">
-                                            <%= eduDescription %>
-                                        </p>
-                                    </li>
+                                    <% universities.forEach(function(university, index) { %>
+                                        <li><h3 class="line-title"><%= university.university %></h3>
+                                            <span>فارغ التحصیل در سال <%= university.endYear %> مقطع <%= university.grade %> رشته <%= university.major %></span>
+                                            <p class="little-text">
+                                                <%= university.eduDescription %>
+                                            </p>
+                                        </li>
+                                    <% }) %>
                                     <!-- a work -->
                                     <!-- <li><h3 class="line-title">دوره طراحی</h3>
                                         <span>2003 - 2004</span>

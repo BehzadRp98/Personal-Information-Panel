@@ -174,14 +174,14 @@
                         <div class="row">
                             <!-- a service -->
                             <% ability.forEach(function(a, index) { %>
-                                <% if (a.length > 0) { %>
-                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                <% if (a.name.length > 0) { %>
+                                    <div style="margin-top: 10px" class="col-md-3 col-sm-6 col-xs-12">
                                         <div class="service">
                                             <div class="icon">
                                                 <img src="/assets/images/administrator-developer.png" width="50" height="50">
                                             </div>
-                                            <span class="title"><%= a %></span>
-                                            <p class="little-text"><%= myRange[index] %> %</p>
+                                            <span class="title"><%= a.name %></span>
+                                            <p class="little-text"><%= a.myRange %> %</p>
                                         </div>
                                     </div>
                                 <% } %>
@@ -247,30 +247,6 @@
                             </li>
                         </ul>
                     </section> -->
-                    <!-- <section class="code-skills col-md-6 padding_60">
-                        <div class="section-title bottom_45"><span></span>
-                            <h2>مهارت های کد</h2></div>
-                        <ul class="skill-list">
-                            <li>
-                                <h3><%= ability %></h3>
-                                <div class="progress">
-                                    <input type="range" value="<%= myRange %>" class="slider percentage">
-                                </div>
-                            </li>
-                            <li>
-                                <h3>HTML5</h3>
-                                <div class="progress">
-                                    <div class="percentage" style="width:60%;"></div>
-                                </div>
-                            </li>
-                            <li>
-                                <h3>CSS3</h3>
-                                <div class="progress">
-                                    <div class="percentage" style="width:30%;"></div>
-                                </div>
-                            </li>
-                        </ul>
-                    </section> -->
                 <!-- </div> -->
             </div>
      </div> <!-- col-md-12 end -->
@@ -280,7 +256,7 @@
     <footer>
         <div class="footer col-md-12 top_30 bottom_30">
             <div class="name col-md-4 hidden-md hidden-sm hidden-xs">ارائه در راستچین</div>
-            <div class="copyright col-lg-8 col-md-12">© تمامی حقوق برای تمینو محفوظ است. <a
+            <div class="copyright col-lg-8 col-md-12">© تمامی حقوق برای تمینو محفوظ است. <a>
                  
         </div>
     </footer>
