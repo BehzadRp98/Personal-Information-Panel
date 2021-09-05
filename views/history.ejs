@@ -228,8 +228,13 @@
                     <% }); %>
 
                     <div id="newUniversityId"></div>
-                    <div id="dynamicCheck" class="mb-3">
-                        <input type="button" class="btn btn-primary bg-green" value="افزودن سابقه تحصیلی" onclick="createNewUniversity();" />
+                    <div class="row" style="justify-content:flex-end">
+                        <div id="dynamicCheck" class="mb-3 ml-2">
+                            <input type="button" class="btn btn-primary bg-green" value="افزودن سابقه تحصیلی" onclick="createNewUniversity();" />
+                        </div>
+                        <div id="dynamicCheck" class="mb-3">
+                            <input type="button" class="btn btn-primary bg-red" value="حذف سابقه تحصیلی" onclick="deleteUniversityElement();" />
+                        </div>
                     </div>
 
                     <div class="horizontal_line"></div>
@@ -261,8 +266,13 @@
                         </div>
                     <% }); %>
                     <div id="newJobId"></div>
-                    <div id="dynamicCheck" class="mb-3">
-                        <input type="button" class="btn btn-primary bg-green" value="افزودن سابقه کاری" onclick="createNewJob();" />
+                    <div class="row" style="justify-content:flex-end">
+                        <div id="dynamicCheck" class="mb-3 ml-2">
+                            <input type="button" class="btn btn-primary bg-green" value="افزودن سابقه کاری" onclick="createNewJob();" />
+                        </div>
+                        <div id="dynamicCheck" class="mb-3">
+                            <input type="button" class="btn btn-primary bg-red" value="حذف سابقه کاری" onclick="deleteJobElement();" />
+                        </div>
                     </div>
 
                     <div class="horizontal_line"></div>
@@ -284,8 +294,13 @@
                             </div>
                         <% }); %>
                     <div id="newElementId"></div>
-                    <div id="dynamicCheck" class="mb-3">
-                        <input type="button" class="btn btn-primary bg-green" value="افزودن مهارت" onclick="createNewElement();" />
+                    <div class="row" style="justify-content:flex-end">
+                        <div id="dynamicCheck" class="mb-3 ml-2">
+                            <input type="button" class="btn btn-primary bg-green" value="افزودن مهارت" onclick="createNewElement();" />
+                        </div>
+                        <div id="dynamicCheck" class="mb-3">
+                            <input type="button" class="btn btn-primary bg-red" value="حذف مهارت" onclick="deleteElement();" />
+                        </div>
                     </div>
 
                     <input type="text" style="display: none;" id="btnStatus" name="btnStatus" value='<%= btnStatus %>'>
@@ -295,10 +310,10 @@
                     <div class="modal-footer">
                         <% if (!btnStatus) { %>
                             <button type="submit" class="btn btn-primary">ذخیره</button>
-                            <% } else { %>
-                                <button type="submit" class="btn btn-primary">بروزرسانی</button>
-                                <button type="submit" class="btn btn-primary" disabled="true">حذف</button>
-                                <% } %>
+                        <% } else { %>
+                            <button type="submit" class="btn btn-primary">بروزرسانی</button>
+                            <!-- <button type="submit" class="btn btn-primary" disabled="true">حذف</button> -->
+                        <% } %>
                     </div>
                 </form>
             </div>
@@ -364,7 +379,7 @@
         function createNewElement() {
             counter = counter + 1
             var txtNewInputBox = document.createElement('div');
-            txtNewInputBox.innerHTML = `<div class="row"> <div class="col-md-12 mb-3"> <input type="text" id="ability${counter}" name="ability${counter}" class="form-control" placeholder="عنوان مهارت"> </div> </div> <div class="row"> <div class="col-md-12 mb-3 range"> <div class="slidecontainer"> <input type="range" min="0" max="100" value="0" class="slider" id="myRange${counter}" name="myRange${counter}"> <p>میزان: <span id="demo${counter}"></span>%</p> </div> </div> </div>`;
+            txtNewInputBox.innerHTML = `<div class="row" id="newDiv${counter}"> <div class="col-md-12 mb-3"> <input type="text" id="ability${counter}" name="ability${counter}" class="form-control" placeholder="عنوان مهارت"> </div> </div> <div class="row"> <div class="col-md-12 mb-3 range"> <div class="slidecontainer"> <input type="range" min="0" max="100" value="0" class="slider" id="myRange${counter}" name="myRange${counter}"> <p id="p${counter}">میزان: <span id="demo${counter}"></span>%</p> </div> </div> </div>`;
             document.getElementById("newElementId").appendChild(txtNewInputBox); 
             var slider = document.getElementById(`myRange${counter}`);
             var output = document.getElementById(`demo${counter}`);
@@ -377,7 +392,7 @@
         function createNewUniversity() {
             universitiesCount = universitiesCount + 1;
             var txtNewInputBox = document.createElement('div');
-            txtNewInputBox.innerHTML = `<div class="row">
+            txtNewInputBox.innerHTML = `<div class="row" id="universityDiv${universitiesCount}">
                         <div class="col-md-6 mb-3">
                             <input type="text" id="grade${universitiesCount}" name="grade${universitiesCount}" class="form-control" placeholder="مقطع تحصیلی">
                         </div>
@@ -405,7 +420,7 @@
         function createNewJob() {
             jobsCount = jobsCount + 1;
             var txtNewInputBox = document.createElement('div');
-            txtNewInputBox.innerHTML = `<div class="row">
+            txtNewInputBox.innerHTML = `<div class="row" id="jobDiv${jobsCount}">
                         <div class="col-md-6 mb-3">
                             <input type="text" id="job${jobsCount}" name="job${jobsCount}" class="form-control" placeholder="شغل">
                         </div>
@@ -429,6 +444,47 @@
                         </div>
                     </div>`;
             document.getElementById("newJobId").appendChild(txtNewInputBox); 
+        }
+        function deleteElement() {
+            let temp = `#newDiv${counter}`
+            $(`${temp}`).remove()
+            let temp0 = `#ability${counter}`
+            $(`${temp0}`).remove()
+            temp1 = `#myRange${counter}`
+            $(`${temp1}`).remove()
+            temp2 = `#demo${counter}`
+            $(`${temp2}`).remove()
+            temp3 = `#p${counter}`
+            $(`${temp3}`).remove()
+        }
+        function deleteUniversityElement() {
+            let temp = `#universityDiv${universitiesCount}`
+            $(`${temp}`).remove()
+            console.log(counter)
+            let temp0 = `#grade${universitiesCount}`
+            $(`${temp0}`).remove()
+            temp1 = `#major${universitiesCount}`
+            $(`${temp1}`).remove()
+            temp2 = `#university${universitiesCount}`
+            $(`${temp2}`).remove()
+            temp3 = `#endYear${universitiesCount}`
+            $(`${temp3}`).remove()
+            temp4 = `#eduDescription${universitiesCount}`
+            $(`${temp4}`).remove()
+        }
+        function deleteJobElement() {
+            let temp = `#jobDiv${jobsCount}`
+            $(`${temp}`).remove()
+            let temp0 = `#job${jobsCount}`
+            $(`${temp0}`).remove()
+            temp1 = `#post${jobsCount}`
+            $(`${temp1}`).remove()
+            temp2 = `#place${jobsCount}`
+            $(`${temp2}`).remove()
+            temp3 = `#expYear${jobsCount}`
+            $(`${temp3}`).remove()
+            temp4 = `#wDescription${jobsCount}`
+            $(`${temp4}`).remove()
         }
     </script>
 </body>

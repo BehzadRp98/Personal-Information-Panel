@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var multer = require('multer');
 var fs = require('fs');
+var passwordValidator = require('password-validator');
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -35,22 +36,54 @@ router.get('/', function(req, res, next) {
 
 // GET register page content
 router.get('/register', function(req, res, next) {
-    res.render('register')
+    if (req.query.mc == 400) {
+        res.render('register', {
+            responseMessage: 'پرکردن فیلدها اجباری است',
+            responseClass: 'alert-danger'
+        })
+        return
+    } else if (req.query.mc == 401) {
+        res.render('register', {
+            responseMessage: 'پسوردهای وارد شده مغایرت دارند',
+            responseClass: 'alert-danger'
+        })
+        return
+    } else if (req.query.mc == 405) {
+        res.render('register', {
+            responseMessage: 'پسورد وارد شده باید حداقل ۸ کاراکتر و شامل حروف بزرگ، کوچک و عدد باشد',
+            responseClass: 'alert-danger'
+        })
+        return
+    } else if (req.query.mc == 500) {
+        res.render('register', {
+            responseMessage: 'خطا در برقراری ارتباط با سرور',
+            responseClass: 'alert-danger'
+        })
+        return
+    }
+    res.render('register', {
+        responseMessage: '',
+        responseClass: ''
+    })
 });
 
 // POST register page content
 router.post('/register', async function(req, res, next) {
     let registerObj = req.body
-
+    var schema = new passwordValidator();
+    schema
+        .is().min(8)
+        .has().uppercase()
+        .has().lowercase()
+        .has().digits(1)
     if (registerObj.email.length == 0 || registerObj.firstName.length == 0 || registerObj.lastName.length == 0) {
-        console.log('پرکردن فیلدها اجباری است')
-        res.send(400)
+        res.redirect('/users/register?mc=400');
         return
-    }
-
-    if (registerObj.password != registerObj.passwordConfirm) {
-        console.log('پسوردهای وارد شده مغایرت دارند')
-        res.send(400)
+    } else if (!schema.validate(registerObj.password)) {
+        res.redirect('/users/register?mc=405');
+        return
+    } else if (registerObj.password != registerObj.passwordConfirm) {
+        res.redirect('/users/register?mc=401');
         return
     }
 
@@ -65,15 +98,27 @@ router.post('/register', async function(req, res, next) {
         return
     }
 
-    res.sendStatus(400)
+    res.redirect('/users/register?mc=500');
 })
 
 // GET login page content
 router.get('/login', function(req, res, next) {
-    // res.render('login')
+    if (req.query.mc == 400) {
+        res.render('login', {
+            responseMessage: 'پرکردن فیلدها اجباری است',
+            responseClass: 'alert-danger'
+        })
+        return
+    } else if (req.query.mc == 401) {
+        res.render('login', {
+            responseMessage: 'نام کاربری یا رمزعبور نادرست است',
+            responseClass: 'alert-danger'
+        })
+        return
+    }
     res.render('login', {
-        success_msg: '',
-        error_msg: ''
+        responseMessage: '',
+        responseClass: ''
     })
 })
 
@@ -82,13 +127,7 @@ router.post('/login', async function(req, res, next) {
     let loginObj = req.body
     if (loginObj.email.length == 0 || loginObj.password.length == 0) {
         console.log('پرکردن فیلدها اجباری است')
-        req.flash('success_msg', 'OK')
-            // res.render('login', {
-            //   success_msg: '',omodule
-
-        //   error_msg: 'پرکردن فیلدها اجباری است'
-        // })
-        // res.sendStatus(400)
+        res.redirect('/users/login?mc=400');
         return
     }
 
@@ -96,7 +135,7 @@ router.post('/login', async function(req, res, next) {
 
     let loginStatus = await usersControllers.selectUserFromDB(loginObj)
 
-    if (loginStatus.password == loginObj.password) {
+    if (loginStatus != null && loginStatus.password == loginObj.password) {
         let token = await authorizationMiddleware.generateJWT(loginStatus)
         console.log(token)
         res.cookie('pi_token', token)
@@ -106,7 +145,7 @@ router.post('/login', async function(req, res, next) {
         return
     }
 
-    res.sendStatus(400)
+    res.redirect('/users/login?mc=401');
 })
 
 // GET dashboard page content
@@ -117,7 +156,7 @@ router.get('/dashboard', authorizationMiddleware.verifyJWT, async function(req, 
 
     res.render('dashboard', {
         userID: req.userInfo.userID,
-        job: historyInfo ? historyInfo.job : ' ',
+        job: historyInfo && historyInfo.job.length > 0 ? historyInfo.job[historyInfo.job.length - 1].job : '',
         firstName: userInfo ? userInfo.firstName : '',
         lastName: userInfo ? userInfo.lastName : '',
         phoneNumber: profileInfo ? profileInfo.phoneNumber : '',
@@ -233,7 +272,7 @@ router.post('/history', authorizationMiddleware.verifyJWT, async function(req, r
                 eduDescription: req.body[eduDescription],
 
             });
-        } else if (String(r).includes('job')) {
+        } else if (String(r).includes('job') && String(r) != "jobsCount") {
             let post = String(r).replace('job', 'post')
             let place = String(r).replace('job', 'place')
             let expYear = String(r).replace('job', 'expYear')
@@ -297,7 +336,7 @@ router.get('/blogs', authorizationMiddleware.verifyJWT, async function(req, res,
         userID: req.userInfo.userID,
         firstName: userInfo ? userInfo.firstName : '',
         lastName: userInfo ? userInfo.lastName : '',
-        job: historyInfo ? historyInfo.job : ' ',
+        job: historyInfo && historyInfo.job.length > 0 ? historyInfo.job[historyInfo.job.length - 1].job : '',
         blogs: blogsInfo,
         blog: blogInfo,
         btnStatus: blogInfo.title.length > 0 ||
@@ -353,7 +392,7 @@ router.get('/tickets', authorizationMiddleware.verifyJWT, async function(req, re
         userID: req.userInfo.userID,
         firstName: userInfo ? userInfo.firstName : '',
         lastName: userInfo ? userInfo.lastName : '',
-        job: historyInfo ? historyInfo.job : ' ',
+        job: historyInfo && historyInfo.job.length > 0 ? historyInfo.job[historyInfo.job.length - 1].job : '',
         responseMessage: responseMessage,
         responseClass: responseClass,
         tickets: ticketsInfo

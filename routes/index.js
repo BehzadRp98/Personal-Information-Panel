@@ -14,8 +14,7 @@ router.get('/', async function(req, res, next) {
     let admins = await usersControllers.selectUsersFromDB()
     for (let a in admins) {
         let temp = await historyControllers.selectHistoryFromDB(admins[a]._id)
-        admins[a].job = temp && temp.job ? temp.job : ''
-        console.log('')
+        admins[a].job = temp && temp.job ? temp.job[temp.job.length - 1].job : ''
     }
     res.render('index', {
         admins: admins
@@ -89,8 +88,8 @@ router.get('/blog', async function(req, res, next) {
         website: profileInfo.website,
         telegram: profileInfo.telegram,
         instagram: profileInfo.instagram,
-        job: historyInfo == null ? 'ثبت نشده' : historyInfo.job,
-        blogs: blogsInfo.length == 0 ? [] : blogsInfo
+        blogs: blogsInfo.length == 0 ? [] : blogsInfo,
+        job: historyInfo && historyInfo.job.length > 0 ? historyInfo.job[historyInfo.job.length - 1].job : '',
     })
 })
 
@@ -121,10 +120,10 @@ router.get('/blog/:id', async function(req, res, next) {
         website: profileInfo.website,
         telegram: profileInfo.telegram,
         instagram: profileInfo.instagram,
-        job: historyInfo == null ? 'ثبت نشده' : historyInfo.job,
         blogs: blogsInfo,
         post: blogInfo,
-        comments: commentsInfo
+        comments: commentsInfo,
+        job: historyInfo && historyInfo.job.length > 0 ? historyInfo.job[historyInfo.job.length - 1].job : '',
     })
 })
 
@@ -169,7 +168,7 @@ router.get('/contact', async function(req, res, next) {
         website: profileInfo.website,
         telegram: profileInfo.telegram,
         instagram: profileInfo.instagram,
-        job: historyInfo == null ? 'ثبت نشده' : historyInfo.job,
+        job: historyInfo && historyInfo.job.length > 0 ? historyInfo.job[historyInfo.job.length - 1].job : '',
     })
 })
 

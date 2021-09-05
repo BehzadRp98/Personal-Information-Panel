@@ -38,6 +38,9 @@
                             <div class="col-lg-6 text-right">
                                 <h2 class="mb-2">ثبت نام</h2>
                                 <p>مشخصات شخصی خود را وارد کنید.</p>
+                                <% if (responseMessage.length > 0) { %>
+                                    <p class="col-md-6 mb-3 text-right <%= responseClass %>"><%= responseMessage %></p>
+                                <% } %>
                                 <form action="/users/register" method="POST">
                                     <div class="row">
                                         <div class="col-lg-6">
