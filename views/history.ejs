@@ -456,6 +456,7 @@
             $(`${temp2}`).remove()
             temp3 = `#p${counter}`
             $(`${temp3}`).remove()
+            counter = counter - 1
         }
         function deleteUniversityElement() {
             let temp = `#universityDiv${universitiesCount}`
@@ -471,6 +472,7 @@
             $(`${temp3}`).remove()
             temp4 = `#eduDescription${universitiesCount}`
             $(`${temp4}`).remove()
+            universitiesCount = universitiesCount - 1
         }
         function deleteJobElement() {
             let temp = `#jobDiv${jobsCount}`
@@ -485,6 +487,7 @@
             $(`${temp3}`).remove()
             temp4 = `#wDescription${jobsCount}`
             $(`${temp4}`).remove()
+            jobsCount = jobsCount - 1
         }
     </script>
 </body>
